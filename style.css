@@ -1,0 +1,48 @@
+article {
+  position: absolute;
+  width: 30%;
+  margin: auto;
+  padding: 10px;
+  left: 35%;
+  max-width: 1000px;
+  background: #9fcdfd;
+  box-shadow: 0 15px 25px rgba(159, 205, 253, 0.7);
+  border-radius: 10px;
+  top:20%;
+  text-align: center;
+}
+
+article::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+h1,label{
+  text-align: center;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+button{
+  width: 140px;
+height: 45px;
+font-family: 'Roboto', sans-serif;
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 2.5px;
+font-weight: 500;
+color: white;
+background-color: #2e5a85;
+border: none;
+border-radius: 45px;
+box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+transition: all 0.3s ease 0s;
+cursor: pointer;
+outline: none;
+margin-left: 20px;
+}
+button:hover{
+  background-color: #1d3853;
+box-shadow: 0px 15px 20px rgba(46, 90, 133, 0.4);
+color: #fff;
+transform: translateY(-7px);
+}
