@@ -1,0 +1,19 @@
+{
+  "sk":{
+    "id1": "Prihlásiť",
+    "id2": "Email",
+    "id3": "Heslo",
+    "id4": "Prihlásiť sa",
+    "id5": "Nespravny email alebo heslo!",
+    "id6": "Ups. Nieco sa pokazilo!"
+
+  },
+  "en":{
+  "id1": "Login",
+  "id2": "Email",
+  "id3": "Password",
+  "id4": "Login",
+  "id5": "Invalid email or password!",
+  "id6": "Oops. Something went wrong!"
+  }
+}
