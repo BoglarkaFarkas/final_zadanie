@@ -24,8 +24,12 @@ try {
                   $_SESSION["email"] = $row['email'];
                   $_SESSION['id'] = $row['id'];
                   $_SESSION['role'] = $row['role'];
-
-                  header("location: loged.php");
+                  $student='student';
+                  if($row['role']==$student){
+                      header("location: logedStudent.php");
+                  }else{
+                      header("location: loged.php");
+                  }
               }else {
                 echo '<script>alert("Nespravny email alebo heslo!");</script>';
               }
