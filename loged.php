@@ -15,6 +15,27 @@ try {
     $sql = "SELECT * FROM zadanieLatex";
     $stmt = $pdo->query($sql);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $startDate=$_POST['mydate'];
+        $timeDate=$_POST['mytime'];
+        $deadlineDate=$_POST['enddate'];
+        $deadlineTime=$_POST['endtime'];
+
+        $sql1 = "SELECT id FROM zadanieLatex WHERE latexSubor = :latexSubor";
+        $stmt1 = $pdo->prepare($sql1);
+        $stmt1->bindParam(":latexSubor", $_POST["my-select"], PDO::PARAM_STR);
+        $stmt1->execute();
+        $row2 = $stmt1->fetch(PDO::FETCH_ASSOC);
+        $latexSubor_id=$row2['id'];
+
+        $teacher_id= $_SESSION["id"];
+        $maxPoint=$_POST['maxnumber'];
+
+        $sql2 = "INSERT INTO testForStudents (startDate, timeDate, deadlineDate, deadlineTime, latexSubor_id,teacher_id, maxPoint) VALUES (?,?,?,?,?,?,?)";
+        $stmt2 = $pdo->prepare($sql2);
+        $success = $stmt2->execute([$startDate, $timeDate,$deadlineDate, $deadlineTime,$latexSubor_id,$teacher_id,$maxPoint]);
+    }
+
 
   }catch (PDOException $e) {
       echo $e->getMessage();
@@ -41,7 +62,7 @@ try {
         <li><a href="loged.php"><img src = "photos/statistics.svg" alt="logout"/></a></li>
         <li><a href="logout.php"><img src = "photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
     </ul>
-<?php  echo "Hello " .$_SESSION["meno"]. " ucitel";?>
+<?php  echo "<h3>User: " .$_SESSION["meno"]. " " .$_SESSION["priezvisko"]. " (učiteľ)</h3>";?>
 <br>
 <br>
 <article>
