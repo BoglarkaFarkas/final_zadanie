@@ -10,6 +10,33 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || !isset($_S
 }
 require_once('private/config.php');
 try {
+    //Checking examples folder for new content
+    $files = scandir('examples');
+
+    foreach ($files as $file) {
+        if ($file != '.' && $file != '..' && pathinfo($file, PATHINFO_EXTENSION) == 'tex') {
+            $filename = pathinfo($file, PATHINFO_FILENAME);
+
+            // Check if file with the same name already exists in the database
+            $sql = "SELECT COUNT(*) as count FROM zadanieLatex WHERE latexSubor = :filename";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':filename', $filename);
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $count = $result['count'];
+
+            if ($count > 0) {
+                continue;
+            }
+
+            $sql = "INSERT INTO zadanieLatex (latexSubor) VALUES (:filename)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':filename', $filename);
+            $stmt->execute();
+        }
+    }
+
     $sql = "SELECT * FROM zadanieLatex";
     $stmt = $pdo->query($sql);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -18,6 +45,87 @@ try {
         $timeDate=$_POST['mytime'];
         $deadlineDate=$_POST['enddate'];
         $deadlineTime=$_POST['endtime'];
+
+        //Add example and solution to table 'examples'
+        $filepath = "examples/" . $_POST['my-select'] . ".tex";
+
+        $file = fopen($filepath, 'r');
+        $texContent = fread($file, filesize($filepath));
+        fclose($file);
+
+        $exampleNames = [];
+        $taskBodies = [];
+        $solutions = [];
+
+        $lines = explode("\n", $texContent);
+        $totalLines = count($lines);
+
+        for ($i = 0; $i < $totalLines; $i++) {
+            // Check for example name
+            if (strpos($lines[$i], '\section*{') !== false) {
+                $exampleName = trim(str_replace(['\section*{', '}'], '', $lines[$i]));
+                $exampleNames[] = $exampleName;
+            }
+
+            // Check for task body
+            if (strpos($lines[$i], '\begin{task}') !== false) {
+                $taskBody = '';
+                $i++;
+
+                while ($i < $totalLines && strpos($lines[$i], '\end{task}') === false) {
+                    $line = trim($lines[$i]);
+                    if (!empty($line)) {
+                        $line = str_replace(['\begin{equation*}', '\end{equation*}'], '$', $line);
+                        $taskBody .= $line . "\n";
+                    }
+                    $i++;
+                }
+
+                $taskBodies[] = trim($taskBody);
+            }
+
+            // Check for solution
+            if (strpos($lines[$i], '\begin{solution}') !== false) {
+                $solution = '';
+                $i++;
+
+                while ($i < $totalLines && strpos($lines[$i], '\end{solution}') === false) {
+                    $line = trim($lines[$i]);
+                    if (!empty($line)) {
+                        $solution .= $line . "\n";
+                    }
+                    $i++;
+                }
+
+                $solution = str_replace(['\begin{equation*}', '\end{equation*}'], '$', $solution);
+                $solutions[] = trim($solution);
+            }
+        }
+
+        // Insert examples from the files to the database
+        for ($i = 0; $i < count($exampleNames); $i++) {
+
+            $exampleName = $exampleNames[$i];
+            $exampleBody = $taskBodies[$i];
+            $solution = $solutions[$i];
+
+            // Check if example with the same name already exists
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM examples WHERE example_name = :example_name");
+            $stmt->bindParam(':example_name', $exampleName);
+            $stmt->execute();
+            $count = $stmt->fetchColumn();
+
+            if ($count == 0) {
+                $stmt = $pdo->prepare("INSERT INTO examples (file_name, example_name, example_body, solution) VALUES (:file_name, :example_name, :example_body, :solution)");
+                $stmt->bindParam(':file_name', $_POST['my-select']);
+                $stmt->bindParam(':example_name', $exampleName);
+                $stmt->bindParam(':example_body', $exampleBody);
+                $stmt->bindParam(':solution', $solution);
+                $stmt->execute();
+
+            }
+        }
+
 
         $sql1 = "SELECT id FROM zadanieLatex WHERE latexSubor = :latexSubor";
         $stmt1 = $pdo->prepare($sql1);
