@@ -31,6 +31,7 @@ Táto tabuľka slúži na ukldanie používateľov.
 Role: 
 - Študent
 - Učiteľ
+
 | meno | priezvisko | email | heslo | role|
 |------|:----------:|:-----:|:-----:|----:|
 
