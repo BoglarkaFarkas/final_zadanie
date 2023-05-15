@@ -20,7 +20,7 @@
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
         $confirm_password = trim($_POST['confirm-password']);
-
+        
         //Kontrola unikatnosti a validi emailu
         $sql_check_email = "SELECT * FROM myUserPanel WHERE email = :email";
         $stmt_check_email = $pdo->prepare($sql_check_email);
@@ -44,7 +44,7 @@
             echo '<div class="alert alert-danger">Heslá sa nezhodujú.</div>';
         }
         // Kontrola vyberu role
-        elseif (strcmp($type, "default")){
+        elseif ($type == "default"){
             echo '<div class="alert alert-danger">Vyberte si svoju rolu.</div>';
         }
         else{
@@ -100,9 +100,9 @@
                 </div>
                 <div class="input-box type form-floating">
                     <select class="form-select" name="type" id="floatingSelect" aria-label="Floating label">
-                        <option value="Default" selected>Vyber si svoju rolu</option>
-                        <option value="Student">Študent</option>
-                        <option value="Teacher">Učiteľ</option>
+                        <option value="default" selected>Vyber si svoju rolu</option>
+                        <option value="student">Študent</option>
+                        <option value="ucitel">Učiteľ</option>
                     </select>
                     <label for="floatingSelect">Rola</label>
                 </div>
