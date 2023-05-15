@@ -25,6 +25,12 @@ Ak by sa nenačítal script na init databázy tak pred spustením kontajnera: ` 
 
 
 ### Databáza
+http://localhost:8081/
+
+Prihlasovacie meno: `webtefinal`
+
+Heslo: `password`
+
 Tabuľka: myUserPanel
 
 Táto tabuľka slúži na ukldanie používateľov.
