@@ -3,16 +3,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (isset($_POST['files'])) { // Render
         foreach ($_POST['files'] as $file) {
-
             $filename = pathinfo($file, PATHINFO_FILENAME);
             $outputDir = "rendered_examples/$filename";
 
             if (!is_dir($outputDir)) {
                 mkdir($outputDir, 0777, true);
-                chmod($outputDir, 0777);
             }
 
             $output = exec("latex2html -no_navigation -dir $outputDir examples/$file");
+            echo $output . "<br>";
             chmod($outputDir, 0777);
         }
     } else if (isset($_POST['del'])) { //Delete
