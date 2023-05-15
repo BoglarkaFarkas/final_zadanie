@@ -165,7 +165,7 @@ try {
   <body>
     <ul>
         <li><a href="loged.php" class="active"><img src = "photos/add-circle-svgrepo-com.svg" alt="student"/></a></li>
-        <li><a href="loged.php"><img src = "photos/statistics.svg" alt="logout"/></a></li>
+        <li><a href="private/components/stats.php"><img src = "photos/statistics.svg" alt="logout"/></a></li>
         <li><a href="logout.php"><img src = "photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
     </ul>
 <?php  echo "<h3>User: " .$_SESSION["meno"]. " " .$_SESSION["priezvisko"]. " (učiteľ)</h3>";?>
