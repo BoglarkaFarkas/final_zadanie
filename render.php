@@ -5,18 +5,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         foreach ($_POST['files'] as $file) {
 
             $filename = pathinfo($file, PATHINFO_FILENAME);
-            $outputDir = "/var/www/site240.webte.fei.stuba.sk/zadZ/rendered_examples/$filename";
+            $outputDir = "rendered_examples/$filename";
 
             if (!is_dir($outputDir)) {
                 mkdir($outputDir, 0777, true);
                 chmod($outputDir, 0777);
             }
 
-            $output = exec("latex2html -no_navigation -dir $outputDir /var/www/site240.webte.fei.stuba.sk/zadZ/examples/$file");
+            $output = exec("latex2html -no_navigation -dir $outputDir examples/$file");
             chmod($outputDir, 0777);
         }
     } else if (isset($_POST['del'])) { //Delete
-        exec('rm -r /var/www/site240.webte.fei.stuba.sk/zadZ/rendered_examples/*');
+        exec('rm -r rendered_examples/*');
     }
 }
 ?>
