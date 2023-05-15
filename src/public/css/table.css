@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body{
+  height: 100vh;
+  width: 100%;
+  place-items: center;
+  background: whitesmoke;
+  font-family: 'Poppins',sans-serif;
+}
+.container{
+    background: #fff;
+    margin: 2em auto;
+    border-radius: 5px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
+    height: 80%;
+}
+h3 {
+    text-align: center;
+    margin: 1em;
+}
+table{
+    margin: 0 auto;
+}
+table th {
+    border-bottom: 1px solid #eee;
+    color: #99004d ;
+    padding: 0.2em;
+    cursor: pointer;
+}
+table th::first-letter {
+    text-transform: uppercase;
+}
+table th a {
+    text-decoration: none;
+    color: #99004d ;
+}
+table td {
+   text-align: center;
+   padding: 0.5em;
+}
+table tr:last-child {
+    border-bottom: 1px solid #eee;
+}
+#myTable_info, 
+#myTable_paginate {
+    text-align: center;
+}
+#myTable_paginate{
+    padding-bottom: 2em;
+    padding-top: 0.5em;
+
+}
+#myTable_paginate a {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+#myTable_previous {
+    margin-right: 1em;
+}
+#myTable_next {
+    margin-left: 1em;
+}
+#myTable_length {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 0.5em;
+}
+.input-box {
+    width: 100%;
+    height: 45px;
+    margin-top: 25px;
+    position: relative; 
+    padding-bottom: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#exportBtn {
+    width: 30%;
+    height: 45px;
+    outline: none;
+    border: none;
+    background: linear-gradient(to right, #99004d 0%, #ff0080 100%);
+    font-size: 17px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+button:focus,
+button:valid {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+#exportBtn {
+    letter-spacing: 1px;
+    background: linear-gradient(to left, #99004d 0%, #ff0080 100%);
+}
