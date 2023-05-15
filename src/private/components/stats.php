@@ -2,6 +2,7 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -17,5 +18,10 @@
     <link href="../../public/css/nav.css" rel="stylesheet">
 </head>
 <body>
-
+    <?php
+        require_once("../classes/Table.php"); 
+        $table = new Table();
+        $htmlTable = $table->generateTable();
+        echo $htmlTable;
+    ?>
 </body>
