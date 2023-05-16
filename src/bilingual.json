@@ -5,16 +5,20 @@
     "id3": "Heslo",
     "id4": "Prihlásiť sa",
     "id5": "Nespravny email alebo heslo!",
-    "id6": "Ups. Nieco sa pokazilo!"
+    "id6": "Ups. Nieco sa pokazilo!",
+    "id7": "Nemáte účet?",
+    "id8": "Zaregistrujte sa"
 
 
   },
-  "en":{
+  "eng":{
   "id1": "Login",
   "id2": "Email",
   "id3": "Password",
   "id4": "Login",
   "id5": "Invalid email or password!",
-  "id6": "Oops. Something went wrong!"
+  "id6": "Oops. Something went wrong!",
+  "id7": "You don't have an account?",
+  "id8": "Sign up"
   }
 }
