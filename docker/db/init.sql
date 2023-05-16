@@ -25,3 +25,8 @@ CREATE TABLE IF NOT EXISTS studentTest (
 	id_student INT UNSIGNED NOT NULL , 
 	id_example INT UNSIGNED NOT NULL 
 ) ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS generatedExamples (
+  id_student int UNSIGNED NOT NULL,
+  id_example int UNSIGNED NOT NULL,
+  status tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
