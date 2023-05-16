@@ -6,8 +6,8 @@ CREATE TABLE IF NOT EXISTS examples (
 	example_name VARCHAR(50) NOT NULL , 
 	example_body TEXT NOT NULL , 
 	solution TEXT NOT NULL , 
-	start_date DATE NULL DEFAULT NULL , 
-	deadline_date DATE NULL DEFAULT NULL , 
+	start_date DATETIME NULL DEFAULT NULL , 
+	deadline_date DATETIME NULL DEFAULT NULL , 
 	points TINYINT UNSIGNED NOT NULL , 
 	solvable BOOLEAN NOT NULL , 
 	PRIMARY KEY (id)
