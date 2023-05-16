@@ -6,18 +6,18 @@
   require_once('private/config.php');
   try {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      $sql = "SELECT * FROM myUserPanel WHERE email = :email";
+      $sql = "SELECT * FROM users WHERE email = :email";
       $stmt = $pdo->prepare($sql);
       $stmt->bindParam(":email", $_POST["email"], PDO::PARAM_STR);
       if ($stmt->execute()) {
           if ($stmt->rowCount() == 1) {
             $row = $stmt->fetch();
-            $hashed_password = $row["heslo"];
-              if (password_verify($_POST['heslo'], $hashed_password)) {
+            $hashed_password = $row["password"];
+              if (password_verify($_POST['password'], $hashed_password)) {
                   session_start();
                   $_SESSION["loggedin"] = true;
-                  $_SESSION["priezvisko"] = $row['priezvisko'];
-                  $_SESSION["meno"] = $row['meno'];
+                  $_SESSION["priezvisko"] = $row['surname'];
+                  $_SESSION["meno"] = $row['name'];
                   $_SESSION["email"] = $row['email'];
                   $_SESSION['id'] = $row['id'];
                   $_SESSION['role'] = $row['role'];
@@ -79,9 +79,9 @@
             </label>
             </div>
             <div class="mb-3">
-            <label for="heslo" class="form-label">
+            <label for="password" class="form-label">
                 Password:
-                <input type="password" class="form-control" name="heslo" value="" id="heslo" required>
+                <input type="password" class="form-control" name="password" value="" id="password" required>
             </label>
             </div>
             <button type="submit">Prihlasit sa</button>
