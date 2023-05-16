@@ -7,7 +7,19 @@
     "id5": "Nespravny email alebo heslo!",
     "id6": "Ups. Nieco sa pokazilo!",
     "id7": "Nemáte účet?",
-    "id8": "Zaregistrujte sa"
+    "id8": "Zaregistrujte sa",
+    "id9": "Registrácia",
+    "firstname": "Zadaj krstné meno",
+    "lastname": "Zadaj priezvisko",
+    "email": "Zadaj email",
+    "password": "Zadaj heslo",
+    "confirmpassword": "Potvrď heslo",
+    "id15": "Pokračuj",
+    "id16": "Rola",
+    "id17": "Vyber si svoju rolu",
+    "id18": "Študent",
+    "id19": "Učiteľ"
+
 
 
   },
@@ -19,6 +31,17 @@
   "id5": "Invalid email or password!",
   "id6": "Oops. Something went wrong!",
   "id7": "You don't have an account?",
-  "id8": "Sign up"
+  "id8": "Sign up",
+  "id9": "Registration",
+  "firstname": "Enter first name",
+  "lastname": "Enter your last name",
+  "email": "Enter email",
+  "password": "Enter the password",
+  "confirmpassword": "Confirm password",
+  "id15": "Continue",
+  "id16": "Role",
+  "id17": "Choose your role",
+  "id18": "Student",
+  "id19": "Teacher"
   }
 }
