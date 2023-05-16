@@ -12,15 +12,15 @@ class Table {
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
     private function getIDs() {
-        $sql = "SELECT id FROM myUserPanel WHERE role = :role";
+        $sql = "SELECT id FROM users WHERE role = :role";
         return $this->executeQuery($sql, [':role' => $this->role]);
     }
     private function getNames() {
-        $sql = "SELECT meno FROM myUserPanel WHERE role = :role";
+        $sql = "SELECT name FROM users WHERE role = :role";
         return $this->executeQuery($sql, [':role' => $this->role]);
     }
     private function getLastNames() {
-        $sql = "SELECT priezvisko FROM myUserPanel WHERE role = :role";
+        $sql = "SELECT surname FROM users WHERE role = :role";
         return $this->executeQuery($sql, [':role' => $this->role]);
     }
     private function generateTbody() {

@@ -22,7 +22,7 @@
         $confirm_password = trim($_POST['confirm-password']);
         
         //Kontrola unikatnosti a validi emailu
-        $sql_check_email = "SELECT * FROM myUserPanel WHERE email = :email";
+        $sql_check_email = "SELECT * FROM users WHERE email = :email";
         $stmt_check_email = $pdo->prepare($sql_check_email);
         $stmt_check_email->execute([
             ':email' => $email
@@ -51,7 +51,7 @@
             // Hashovanie hesla
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-            $sql = "INSERT INTO myUserPanel (meno, priezvisko, email, heslo, role)
+            $sql = "INSERT INTO users (name, surname, email, password, role)
                     VALUES (:first_name, :last_name, :email, :password, :type)";
             try{
                 $stmt = $pdo->prepare($sql);

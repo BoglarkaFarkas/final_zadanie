@@ -39,7 +39,7 @@ require_once('private/config.php');
 
       echo count($tests) . "<br>";
 
-      $sql = "SELECT CONCAT(meno, ' ', priezvisko) AS name FROM myUserPanel WHERE id=?";
+      $sql = "SELECT CONCAT(name, ' ', surname) AS name FROM users WHERE id=?";
       $stmt = $pdo->prepare($sql);
       $stmt->execute([$row['teacher_id']]);
       $teacher = $stmt->fetch(PDO::FETCH_ASSOC);

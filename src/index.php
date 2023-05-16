@@ -6,18 +6,18 @@
   require_once('private/config.php');
   try {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      $sql = "SELECT * FROM users WHERE email = :email";
+      $sql = "SELECT * FROM myUserPanel WHERE email = :email";
       $stmt = $pdo->prepare($sql);
       $stmt->bindParam(":email", $_POST["email"], PDO::PARAM_STR);
       if ($stmt->execute()) {
           if ($stmt->rowCount() == 1) {
             $row = $stmt->fetch();
-            $hashed_password = $row["password"];
-              if (password_verify($_POST['password'], $hashed_password)) {
+            $hashed_password = $row["heslo"];
+              if (password_verify($_POST['heslo'], $hashed_password)) {
                   session_start();
                   $_SESSION["loggedin"] = true;
-                  $_SESSION["priezvisko"] = $row['surname'];
-                  $_SESSION["meno"] = $row['name'];
+                  $_SESSION["priezvisko"] = $row['priezvisko'];
+                  $_SESSION["meno"] = $row['meno'];
                   $_SESSION["email"] = $row['email'];
                   $_SESSION['id'] = $row['id'];
                   $_SESSION['role'] = $row['role'];
@@ -28,14 +28,14 @@
                       header("location: loged.php");
                   }
               }else {
-                echo '<div class="alert alert-danger" id="id5">Nespravny email alebo heslo.</div>';
+                echo '<div class="alert alert-danger">Nespravny email alebo heslo.</div>';
               }
 
           }else{
-            echo '<div class="alert alert-danger" id="id5">Nespravny email alebo heslo.</div>';
+            echo '<div class="alert alert-danger">Nespravny email alebo heslo.</div>';
           }
         }else{
-          echo '<div class="alert alert-danger" id="id6">Ups. Nieco sa pokazilo.</div>';
+          echo '<div class="alert alert-danger">Ups. Nieco sa pokazilo.</div>';
         }
         unset($stmt);
         unset($pdo);
@@ -44,7 +44,6 @@
   } catch (PDOException $e) {
       echo $e->getMessage();
   }
-  
  ?>
 <!doctype html>
 <html lang="sk">
@@ -62,14 +61,12 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="public/css/style.css">
   
-
- 
 </head>
 <body>
   <article>
     <header>
       <hgroup>
-          <h1 id="id1">Login:</h1>
+          <h1>Login</h1>
         </hgroup>
     </header>
     <main>
@@ -77,55 +74,21 @@
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
             <div class="mb-3">
             <label for="email" class="form-label">
-                <span id="id2">Email</span>:
+                Email:
                 <input type="text" class="form-control" name="email" value="" id="email" required>
             </label>
             </div>
             <div class="mb-3">
-            <label for="password" class="form-label">
-                <span id="id3">Password</span>:
-                <input type="password" class="form-control" name="password" value="" id="password" required>
+            <label for="heslo" class="form-label">
+                Password:
+                <input type="password" class="form-control" name="heslo" value="" id="heslo" required>
             </label>
             </div>
-            <button type="submit" id="id4">Prihlasit sa</button>
+            <button type="submit">Prihlasit sa</button>
         </form>
-        <p id="id7">Nemáte účet? <a href="private/components/registration.php" id='id8'>Zaregistrujte sa</a></p>
+        <p>Nemáte účet? <a href="private/components/registration.php">Zaregistrujte sa</a></p>
       </div>
-      <button id="sk-button">SK</button>
-      <button id="eng-button">ENG</button>
     </main>
   </article>
-  <script>
-
-document.getElementById("sk-button").addEventListener("click", function() {
-  fetch('bilingual.json')
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById("id1").textContent = data.sk.id1;
-      document.getElementById("id2").textContent = data.sk.id2;
-      document.getElementById("id3").textContent = data.sk.id3;
-      document.getElementById("id4").textContent = data.sk.id4;
-      //document.getElementById("id5").textContent = data.sk.id5;
-      //document.getElementById("id6").textContent = data.sk.id6;
-      document.getElementById("id7").innerHTML = data.sk.id7 + ' <a href="private/components/registration.php" id="id8">Zaregistrujte sa</a>';
-     // document.getElementById("id8").innerHTML = ' <a href="private/components/registration.php" id="id8">Zaregistrujte sa</a>';
-    });
-});
-
-document.getElementById("eng-button").addEventListener("click", function() {
-  fetch('bilingual.json')
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById("id1").textContent = data.eng.id1;
-      document.getElementById("id2").textContent = data.eng.id2;
-      document.getElementById("id3").textContent = data.eng.id3;
-      document.getElementById("id4").textContent = data.eng.id4;
-      //document.getElementById("id5").textContent = data.eng.id5;
-      //document.getElementById("id6").textContent = data.eng.id6;
-      document.getElementById("id7").innerHTML = data.eng.id7 + ' <a href="private/components/registration.php" id="id8">Sign up</a>';
-      //document.getElementById("id8").textContent = data.eng.id8;
-    });
-});
-</script>
  </body>
  </html>
