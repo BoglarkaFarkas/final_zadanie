@@ -21,7 +21,7 @@ Spustenie kontajnera: ` docker-compose up --build -d `
 
 Zastavenie kontajnera: ` docker-compose down ` 
 
-Ak by sa nenačítal script na init databázy tak pred spustením kontajnera: ` docker volume rm data_volume `
+Ak by sa nenačítal script na init databázy tak pred spustením kontajnera: ` docker volume rm final_zadanie_db_data `
 
 
 ### Databáza
