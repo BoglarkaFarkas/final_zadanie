@@ -10,6 +10,19 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || !isset($_S
     header("Location: index.php");
     exit;
 }
+
+// If Continue or New Example buttons are pressed, the page redirects to example.php with the correct exampleID
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['exampleID'])) {
+
+    $exampleID = $_POST['exampleID'];
+    unset($_POST['exampleID']);
+
+    $_SESSION['exampleID'] = $exampleID;
+
+    header('Location: example.php');
+    exit;
+}
+
 require_once('private/config.php');
 
 ?>
@@ -56,9 +69,10 @@ require_once('private/config.php');
   function checkSolvedExamples($pdo, $file_name, $student_id) {
 
       // Check if there is a started example from the test
-      $sql = "SELECT * FROM generatedExamples WHERE id_student = :id AND status IS NULL;";
+      $sql = "SELECT ge.* FROM generatedExamples AS ge JOIN examples AS e ON ge.id_example = e.id WHERE ge.id_student = :id AND ge.status IS NULL AND e.file_name = :file_name;";
       $stmt = $pdo->prepare($sql);
       $stmt->bindParam(':id', $student_id);
+      $stmt->bindParam(':file_name', $file_name);
       $stmt->execute();
       $foundNull = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -85,20 +99,19 @@ require_once('private/config.php');
           if ($foundNull) {
               if (count($foundNull) > 0) {
 
-                  $id_example = $foundNull['id_example'];
+                  $exampleID = $foundNull['id_example'];
 
                   $sql = "SELECT * FROM examples WHERE id = :id_example";
                   $stmt = $pdo->prepare($sql);
-                  $stmt->bindParam(':id_example', $id_example);
+                  $stmt->bindParam(':id_example', $exampleID);
                   $stmt->execute();
                   $exampleToContinue = $stmt->fetch(PDO::FETCH_ASSOC);
 
                   echo "There is an already started example<br>";
                   echo $exampleToContinue['example_name'];
 
-                  $_SESSION['exampleID'] = $id_example;
-
-                  echo '<form method="post" action="example.php">';
+                  echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+                  echo '<input type="hidden" name="exampleID" value="' . $exampleID . '">';
                   echo '<input type="submit" id="continueBut" value="Continue" onclick="redirect()">';
                   echo '</form> </section>';
 
@@ -114,12 +127,10 @@ require_once('private/config.php');
                $stmt->bindParam(':file_name', $file_name);
                $stmt->bindParam(':id_student', $student_id);
                $stmt->execute();
-               $randomExample = $stmt->fetch(PDO::FETCH_ASSOC);
+               $exampleID = $stmt->fetch(PDO::FETCH_ASSOC)['id'];
 
-
-               $_SESSION['exampleID'] = $randomExample['id'];
-
-               echo '<form method="post" action="example.php">';
+               echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+               echo '<input type="hidden" name="exampleID" value="' . $exampleID . '">';
                echo '<input type="submit" id="continueBut2" value="New example" onclick="redirect()">';
                echo '</form></section>';
           }
