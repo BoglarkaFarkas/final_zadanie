@@ -37,9 +37,15 @@ require_once('private/config.php');
   foreach ($tests as $row) {
 
       echo "Name:   " . $row['file_name'] . "<br>";
-      echo "Start:   " . $row['start_date'] . "<br>";
-      echo "End:   " . $row['deadline_date'] . "<br>";
-      echo "Points:   " . $row['points'] . "<br>";
+
+      if (empty($row['start_date']) && empty($row['deadline_date'])) {
+          echo "There is no time limit" . "<br>";
+      } else {
+          echo "Start:   " . $row['start_date'] . "<br>";
+          echo "End:   " . $row['deadline_date'] . "<br>";
+      }
+
+      echo "Points for a right answer:   " . $row['points'] . "<br>";
       echo "<br>";
 
       checkSolvedExamples($pdo, $row['file_name'], $_SESSION['id']);
@@ -75,30 +81,46 @@ require_once('private/config.php');
           echo "Every example solved from this test";
 
       } else {
+          if ($foundNull) {
+              if (count($foundNull) > 0) {
 
-          if (count($foundNull) > 0) {
+                  $id_example = $foundNull['id_example'];
 
-              $id_example = $foundNull['id_example'];
+                  $sql = "SELECT * FROM examples WHERE id = :id_example";
+                  $stmt = $pdo->prepare($sql);
+                  $stmt->bindParam(':id_example', $id_example);
+                  $stmt->execute();
+                  $exampleToContinue = $stmt->fetch(PDO::FETCH_ASSOC);
 
-              $sql = "SELECT * FROM examples WHERE id = :id_example";
-              $stmt = $pdo->prepare($sql);
-              $stmt->bindParam(':id_example', $id_example);
-              $stmt->execute();
-              $exampleToContinue = $stmt->fetch(PDO::FETCH_ASSOC);
+                  echo "There is an already started example<br>";
+                  echo $exampleToContinue['example_name'];
 
-              echo "There is an already started example<br>";
-              echo $exampleToContinue['example_name'];
+                  $_SESSION['exampleID'] = $id_example;
 
-              $_SESSION['exampleID'] = $id_example;
+                  echo '<form method="post" action="example.php">';
+                  echo '<input type="submit" value="Continue" onclick="redirect()">';
+                  echo '</form>';
 
-              echo '<form method="post" action="example.php">';
-              echo '<input type="submit" value="Continue" onclick="redirect()">';
-              echo '</form>';
-
-          } else {
+              }
+          }
+           else {
 
               echo "You can generate a new example";
 
+              // Pick a random row from the solvable ones
+               $sql = "SELECT * FROM examples e WHERE e.file_name = :file_name AND e.id NOT IN ( SELECT id_example FROM generatedExamples WHERE id_student = :id_student ) ORDER BY RAND() LIMIT 1;";
+               $stmt = $pdo->prepare($sql);
+               $stmt->bindParam(':file_name', $file_name);
+               $stmt->bindParam(':id_student', $student_id);
+               $stmt->execute();
+               $randomExample = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+               $_SESSION['exampleID'] = $randomExample['id'];
+
+               echo '<form method="post" action="example.php">';
+               echo '<input type="submit" value="New example" onclick="redirect()">';
+               echo '</form>';
           }
       }
   }

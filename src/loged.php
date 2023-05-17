@@ -47,7 +47,7 @@ try {
                         $line = trim($lines[$i]);
                         if (!empty($line)) {
                             $line = str_replace(['\begin{equation*}', '\end{equation*}'], '$', $line);
-                            $line = str_replace('\\', '', $line);
+                            $line = str_replace('\\\\', '', $line);
                             $taskBody .= $line . "\n";
                         }
                         $i++;
