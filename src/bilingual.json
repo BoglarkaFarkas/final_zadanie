@@ -18,7 +18,21 @@
     "id16": "Rola",
     "id17": "Vyber si svoju rolu",
     "id18": "Študent",
-    "id19": "Učiteľ"
+    "id19": "Učiteľ",
+    "id10": "Zoznam študentov",
+    "exportBtn": "Exportovať do CSV",
+    "id23": "ID",
+    "id21": "Meno",
+    "id22": "Priezvisko",
+    "id24": "Dátum začiatku",
+    "id25": "Doba spustenia",
+    "id26": "Maximálny počet bodov",
+    "id27": "Súbor",
+    "id28": "Deň uzavretia",
+    "id29": "Čas uzavretia",
+    "id30": "Poslať"
+
+   
 
 
 
@@ -42,6 +56,18 @@
   "id16": "Role",
   "id17": "Choose your role",
   "id18": "Student",
-  "id19": "Teacher"
+  "id19": "Teacher",
+  "id10": "List of students",
+  "exportBtn": "Export to CSV",
+  "id23": "ID",
+  "id21": "Name",
+  "id22": "Surname",
+  "id24": "Start date",
+  "id25": "Start time",
+  "id26": "Max points",
+  "id27": "File",
+  "id28": "Deadline date",
+  "id29": "Deadline time",
+  "id30": "Submit"
   }
 }

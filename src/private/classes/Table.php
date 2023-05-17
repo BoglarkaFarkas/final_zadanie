@@ -45,9 +45,9 @@ class Table {
         <table id="myTable">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Meno</th>
-                    <th>Priezvisko</th>
+                    <th id="id23">ID</th>
+                    <th id="id21">Meno</th>
+                    <th id="id22">Priezvisko</th>
                 </tr>
             </thead>'
             . $this->generateTbody() . 
