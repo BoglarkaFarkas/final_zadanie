@@ -35,7 +35,7 @@ services:
     build: .
     volumes:
       - ./src:/var/www/html
-      - ./vendor:/var/www/html/vendor
+      #- ./vendor:/var/www/html/vendor
 
 volumes:
   db_data:
