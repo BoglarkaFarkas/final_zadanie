@@ -20,6 +20,21 @@ require_once('private/config.php');
 $exampleID = $_SESSION['exampleID'];
 unset($_SESSION['exampleID']);
 
+// Insert example to the database only if it is not there already
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM generatedExamples WHERE id_student = :id_student AND id_example = :id_example");
+$stmt->bindParam(':id_student', $_SESSION['id']);
+$stmt->bindParam(':id_example', $exampleID);
+$stmt->execute();
+$rowCount = $stmt->fetchColumn();
+
+if ($rowCount == 0) {
+    $sql = "INSERT INTO generatedExamples (id_student, id_example) VALUES (:id_student, :id_example)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':id_student', $_SESSION['id']);
+    $stmt->bindParam(':id_example', $exampleID);
+    $stmt->execute();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +89,7 @@ unset($_SESSION['exampleID']);
 </script>
 
 <p>Solution: <span id="math-field"></span></p>
-<p>In LaTeX: <span id="latex"></span></p>
+<span id="latex" style="display: none"></span>
 
 <script>
     $(document).ready(function() {

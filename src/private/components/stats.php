@@ -27,7 +27,7 @@
       <li><a href="stats.php"  class="active"><img src = "../../photos/statistics.svg" alt="logout"/></a></li>
       <li><a href="../../logout.php"><img src = "../../photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
   </nav>
-  <h3 class="py-2">Zoznam študentov</h3>
+  <h3 class="py-2" id="id20">Zoznam študentov</h3>
     <section>
         <div class="container">
             <?php
@@ -41,6 +41,10 @@
             </div>
 
         </div>
+        <div class="buttonsForBil">
+        <button id="sk-button">SK</button>
+        <button id="eng-button">ENG</button>
+        </div>
     </section>
     <!------------------------------------------JS---------------------------------------->
     <script>
@@ -50,5 +54,31 @@
             });
         } );
     </script>
+    <script>
+        document.getElementById("sk-button").addEventListener("click", function() {
+        fetch('../../bilingual.json')
+            .then(response => response.json())
+            .then(data => {
+            document.getElementById("id20").textContent = "Zoznam študentov";
+            document.getElementById("exportBtn").textContent = "Exportovať do CSV";
+            document.getElementById("id23").textContent = "ID";
+            document.getElementById("id21").textContent = "Meno";
+            document.getElementById("id22").textContent = "Priezvisko";
+            });
+        });
+
+        document.getElementById("eng-button").addEventListener("click", function() {
+        fetch('../../bilingual.json')
+            .then(response => response.json())
+            .then(data => {
+            document.getElementById("id20").textContent = "List of students";
+            document.getElementById("exportBtn").textContent = "Export to CSV";
+            document.getElementById("id23").textContent = "ID";
+            document.getElementById("id21").textContent = "Name";
+            document.getElementById("id22").textContent = "Surname";
+            });
+        });
+    </script>
     <script src="../../public/js/exportCSV.js"></script>
+   
 </body>

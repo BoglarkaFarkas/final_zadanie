@@ -47,7 +47,7 @@ try {
                         $line = trim($lines[$i]);
                         if (!empty($line)) {
                             $line = str_replace(['\begin{equation*}', '\end{equation*}'], '$', $line);
-                            $line = str_replace('\\', '', $line);
+                            $line = str_replace('\\\\', '', $line);
                             $taskBody .= $line . "\n";
                         }
                         $i++;
@@ -142,35 +142,39 @@ try {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     </head>
   </head>
+  <div class="buttonsForBil">
+    <button id="sk-button">SK</button>
+    <button id="eng-button">ENG</button>
+  </div>
   <body>
     <nav>
         <li><a href="loged.php" class="active"><img src = "photos/add-circle-svgrepo-com.svg" alt="student"/></a></li>
         <li><a href="private/components/stats.php"><img src = "photos/statistics.svg" alt="logout"/></a></li>
         <li><a href="logout.php"><img src = "photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
     </nav>
-<?php  echo "<h3>User: " .$_SESSION["meno"]. " " .$_SESSION["priezvisko"]. " (učiteľ)</h3>";?>
+<?php  echo "<h3 id='id31'>User: " .$_SESSION["meno"]. " " .$_SESSION["priezvisko"]. "(učiteľ)</h3>";?>
 <br>
 <br>
 <section>
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
   <div class="mb-3">
   <label for="mydate" class="form-label">
-      Start date:
+    <span id="id24">Start date</span>:
       <input type="date" class="form-control" name="mydate" value="" id="mydate" required>
   </label>
 
   <label for="mytime" class="form-label">
-      Start time:
+    <span id="id25">Start time</span>:
       <input type="time" class="form-control" name="mytime" value="" id="mytime" required>
   </label>
   <br>
   <label for="maxnumber" class="form-label">
-      Max points:
+    <span id="id26">Max points</span>:
       <input type="number" class="form-control" name="maxnumber" value="" id="maxnumber" required>
   </label>
 
   <label for="my-select" class="form-label">
-    File:
+    <span id="id27">File</span>:
   <?php
   $select_options = "";
   foreach ($results as $option) {
@@ -183,18 +187,57 @@ try {
 </label>
 <br>
 <label for="enddate" class="form-label">
-    Deadline date:
+    <span id="id28">Deadline date</span>:
     <input type="date" class="form-control" name="enddate" value="" id="enddate" required>
 </label>
 
 <label for="endtime" class="form-label">
-    Deadline time:
+    <span id="id29">Deadline time</span>:
     <input type="time" class="form-control" name="endtime" value="" id="endtime" required>
 </label>
 <br><br>
-  <button type="submit">Submit</button>
+  <button type="submit" id="id30">Submit</button>
   </div>
 </form>
 </section>
+<script>
+    document.getElementById("sk-button").addEventListener("click", function() {
+    fetch('bilingual.json')
+        .then(response => response.json())
+        .then(data => {
+        document.getElementById("id24").textContent = data.sk.id24;
+        document.getElementById("id25").textContent = data.sk.id25;
+        document.getElementById("id26").textContent = data.sk.id26;
+        document.getElementById("id27").textContent = data.sk.id27;
+        document.getElementById("id28").textContent = data.sk.id28;
+        document.getElementById("id29").textContent = data.sk.id29;
+        document.getElementById("id30").textContent = data.sk.id30;
+        var first = "<?php echo $_SESSION["meno"]; ?>";
+        var second = "<?php echo $_SESSION["priezvisko"]; ?>";
+        var elem = "<h3 id='id31'>Pouzivatel: " + first + " " + second + " (učiteľ)</h3>";
+
+        document.getElementById("id31").innerHTML = elem;
+        });
+    });
+
+    document.getElementById("eng-button").addEventListener("click", function() {
+    fetch('bilingual.json')
+        .then(response => response.json())
+        .then(data => {
+        document.getElementById("id24").textContent = data.eng.id24;
+        document.getElementById("id25").textContent = data.eng.id25;
+        document.getElementById("id26").textContent = data.eng.id26;
+        document.getElementById("id27").textContent = data.eng.id27;
+        document.getElementById("id28").textContent = data.eng.id28;
+        document.getElementById("id29").textContent = data.eng.id29;
+        document.getElementById("id30").textContent = data.eng.id30;
+        var first = "<?php echo $_SESSION["meno"]; ?>";
+        var second = "<?php echo $_SESSION["priezvisko"]; ?>";
+        var elem = "<h3 id='id31'>User: " + first + " " + second + " (teacher)</h3>";
+
+        document.getElementById("id31").innerHTML = elem;
+        });
+    });
+</script>
   </body>
 </html>
