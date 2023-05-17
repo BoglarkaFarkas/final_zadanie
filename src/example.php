@@ -6,16 +6,17 @@ error_reporting(E_ALL);
 
 session_start();
 $student='student';
+require_once('private/config.php');
 
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || !isset($_SESSION["role"]) || strcmp($student,$_SESSION["role"]) != 0){
     header("Location: index.php");
     exit;
 }
+
 if(!isset($_SESSION['exampleID'])){
     header("Location: logedStudent.php");
     exit;
 }
-require_once('private/config.php');
 
 $exampleID = $_SESSION['exampleID'];
 unset($_SESSION['exampleID']);
@@ -89,19 +90,40 @@ if ($rowCount == 0) {
 </script>
 
 <p>Solution: <span id="math-field"></span></p>
-<span id="latex" style="display: none"></span>
-
+<form id="form" action="" method="post">
+    <input id="latex" name="latex" type="hidden" value="">
+    <input id="exampleID" name="exampleID" type="hidden" value="<?php echo $exampleID; ?>">
+    <button type="button" onclick="submitForm()">Submit</button>
+</form>
 <script>
+    function submitForm() {
+        let formData = $('#form').serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: 'checkSolution.php',
+            data: formData,
+            success: function(response) {
+                console.log(response);
+
+                //window.location.href = 'logedStudent.php';
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr + " " + status + " " + error);
+            }
+        });
+    }
+
     $(document).ready(function() {
         var mathFieldSpan = document.getElementById('math-field');
-        var latexSpan = document.getElementById('latex');
+        var latex = document.getElementById('latex');
 
         var MQ = MathQuill.getInterface(2);
         var mathField = MQ.MathField(mathFieldSpan, {
             spaceBehavesLikeTab: true,
             handlers: {
                 edit: function() {
-                    latexSpan.textContent = mathField.latex();
+                    latex.value = mathField.latex();
                 }
             }
         });
