@@ -13,7 +13,7 @@
     <nav>
         <li><a href="../../loged.php"><img src = "../../photos/add-circle-svgrepo-com.svg" alt="student"/></a></li>
         <li><a href="stats.php"><img src = "../../photos/statistics.svg" alt="stats"/></a></li>
-        <li><a href="pdf.php"  class="active"><img src = "../../photos/guide-link-svgrepo-com.svg" alt="man"/></a></li>
+        <li><a href="teacherPdf.php"  class="active"><img src = "../../photos/guide-link-svgrepo-com.svg" alt="man"/></a></li>
         <li><a href="../../logout.php"><img src = "../../photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
     </nav>
     <div class="container my-5 shadow p-3 mb-5 bg-light rounded">

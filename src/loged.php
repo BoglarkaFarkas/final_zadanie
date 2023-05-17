@@ -150,31 +150,32 @@ try {
     <nav>
         <li><a href="loged.php" class="active"><img src = "photos/add-circle-svgrepo-com.svg" alt="student"/></a></li>
         <li><a href="private/components/stats.php"><img src = "photos/statistics.svg" alt="logout"/></a></li>
+        <li><a href="private/components/teacherPdf.php"><img src = "photos/guide-link-svgrepo-com.svg" alt="man"/></a></li>
         <li><a href="logout.php"><img src = "photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
     </nav>
-<?php  echo "<h3 id='id31'>User: " .$_SESSION["meno"]. " " .$_SESSION["priezvisko"]. "(učiteľ)</h3>";?>
+<?php  echo "<h3 id='id31'>Používatel: " .$_SESSION["meno"]. " " .$_SESSION["priezvisko"]. "(učiteľ)</h3>";?>
 <br>
 <br>
 <section>
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
   <div class="mb-3">
   <label for="mydate" class="form-label">
-    <span id="id24">Start date</span>:
+    <span id="id24">Dátum začiatku</span>:
       <input type="date" class="form-control" name="mydate" value="" id="mydate" required>
   </label>
 
   <label for="mytime" class="form-label">
-    <span id="id25">Start time</span>:
+    <span id="id25">Doba spustenia</span>:
       <input type="time" class="form-control" name="mytime" value="" id="mytime" required>
   </label>
   <br>
   <label for="maxnumber" class="form-label">
-    <span id="id26">Max points</span>:
+    <span id="id26">Maximálny počet bodov</span>:
       <input type="number" class="form-control" name="maxnumber" value="" id="maxnumber" required>
   </label>
 
   <label for="my-select" class="form-label">
-    <span id="id27">File</span>:
+    <span id="id27">Súbor</span>:
   <?php
   $select_options = "";
   foreach ($results as $option) {
@@ -187,16 +188,16 @@ try {
 </label>
 <br>
 <label for="enddate" class="form-label">
-    <span id="id28">Deadline date</span>:
+    <span id="id28">Deň uzavretia</span>:
     <input type="date" class="form-control" name="enddate" value="" id="enddate" required>
 </label>
 
 <label for="endtime" class="form-label">
-    <span id="id29">Deadline time</span>:
+    <span id="id29">Čas uzavretia</span>:
     <input type="time" class="form-control" name="endtime" value="" id="endtime" required>
 </label>
 <br><br>
-  <button type="submit" id="id30">Submit</button>
+  <button type="submit" id="id30">Poslať</button>
   </div>
 </form>
 </section>
