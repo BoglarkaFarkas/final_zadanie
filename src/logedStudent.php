@@ -49,7 +49,7 @@ require_once('private/config.php');
   function checkSolvedExamples($pdo, $file_name, $student_id) {
 
       // Check if there is a started example from the test
-      $sql = "SELECT * FROM studentTest WHERE id_student = :id AND status IS NULL;";
+      $sql = "SELECT * FROM generatedExamples WHERE id_student = :id AND status IS NULL;";
       $stmt = $pdo->prepare($sql);
       $stmt->bindParam(':id', $student_id);
       $stmt->execute();
@@ -62,8 +62,8 @@ require_once('private/config.php');
       $stmt->execute();
       $example_count = $stmt->fetch(PDO::FETCH_ASSOC)['example_count'];
 
-      // Count the number of id_example values with the same file_name in the studentTest table
-      $sql = "SELECT COUNT(*) AS solved_example_count FROM studentTest JOIN examples ON studentTest.id_example = examples.id WHERE examples.file_name = :file_name AND studentTest.id_student = :student_id AND studentTest.status IS NOT NULL";
+      // Count the number of id_example values with the same file_name in the generatedExamples table
+      $sql = "SELECT COUNT(*) AS solved_example_count FROM generatedExamples JOIN examples ON generatedExamples.id_example = examples.id WHERE examples.file_name = :file_name AND generatedExamples.id_student = :student_id AND generatedExamples.status IS NOT NULL";
       $stmt = $pdo->prepare($sql);
       $stmt->bindParam(':file_name', $file_name);
       $stmt->bindParam(':student_id', $student_id);
@@ -100,14 +100,8 @@ require_once('private/config.php');
               echo "You can generate a new example";
 
           }
-
       }
-
-
-
-
   }
-
 
   ?>
   <script>
