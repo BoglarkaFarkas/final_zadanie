@@ -68,7 +68,6 @@ if ($rowCount == 0) {
 <div>
     <?php
 
-
     $sql = "SELECT * FROM examples WHERE id = :id;";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':id', $exampleID);
@@ -76,8 +75,21 @@ if ($rowCount == 0) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     echo "<h2>" . $result['example_name'] . "</h2>";
-    echo $result['example_body'];
 
+    // Replace \includegraphics{...} part with the image
+    $pattern = '/\\\\includegraphics{([^}]+)}/';
+    $matches = [];
+    $text = $result['example_body'];
+
+    if (preg_match($pattern, $text, $matches)) {
+        $imageFilename = $matches[1];
+
+        $imageTag = '<img src="' . $imageFilename . '" alt="Picture">';
+
+        $modifiedText = preg_replace($pattern, $imageTag, $text);
+
+        echo $modifiedText;
+    }
 
     ?>
 </div>
@@ -89,7 +101,7 @@ if ($rowCount == 0) {
         });
 </script>
 
-<p>Solution: <span id="math-field"></span></p>
+<p>Solution: <span id="math-field" style="width: 3rem; height: 1.5rem;"></span></p>
 <form id="form" action="" method="post">
     <input id="latex" name="latex" type="hidden" value="">
     <input id="exampleID" name="exampleID" type="hidden" value="<?php echo $exampleID; ?>">
