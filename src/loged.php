@@ -151,6 +151,7 @@ try {
         <li><a href="loged.php" class="active"><img src = "photos/add-circle-svgrepo-com.svg" alt="student"/></a></li>
         <li><a href="private/components/stats.php"><img src = "photos/statistics.svg" alt="logout"/></a></li>
         <li><a href="private/components/teacherPdf.php"><img src = "photos/guide-link-svgrepo-com.svg" alt="man"/></a></li>
+        <li><a href="private/components/uploadForm.php"><img src = "photos/upload-svgrepo-com.svg" alt="upload"/></a></li>
         <li><a href="logout.php"><img src = "photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
     </nav>
 <?php  echo "<h3 id='id31'>Používatel: " .$_SESSION["meno"]. " " .$_SESSION["priezvisko"]. "(učiteľ)</h3>";?>

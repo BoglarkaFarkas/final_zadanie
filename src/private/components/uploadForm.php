@@ -1,4 +1,9 @@
 <?php 
+session_start();
+if(!isset($_SESSION)){
+    header("Location: ../../index.php");
+    exit;
+}
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $targetDir = "../../examples/";
     $uploadOk = 1;
@@ -67,6 +72,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <link href="../../public/css/nav.css" rel="stylesheet">
 </head>
 <body>
+    <nav>
+        <li><a href="../../loged.php"><img src = "../../photos/add-circle-svgrepo-com.svg" alt="student"/></a></li>
+        <li><a href="stats.php"><img src = "../../photos/statistics.svg" alt="stats"/></a></li>
+        <li><a href="teacherPdf.php"> <img src = "../../photos/guide-link-svgrepo-com.svg" alt="man"/></a></li>
+        <li><a href="uploadForm.php" class="active"><img src = "../../photos/upload-svgrepo-com.svg" alt="upload"/></a></li>
+        <li><a href="../../logout.php"><img src = "../../photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
+    </nav>
     <section>
         <div class="container">
             <form method="post" enctype="multipart/form-data">

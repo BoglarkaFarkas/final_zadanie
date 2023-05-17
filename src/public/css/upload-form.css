@@ -78,3 +78,36 @@ section {
     letter-spacing: 1px;
     background: linear-gradient(to left, #99004d 0%, #ff0080 100%);
 }
+nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  
+  .active {
+    background-color: #9fcdfd;
+    border-radius: 10px;
+  }
+  a>img{
+    width: 45px;
+    height: auto;
+  }
+  h3{
+    text-align: center;
+    color:#2e5a85;
+  }
