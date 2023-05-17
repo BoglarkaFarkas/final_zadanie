@@ -143,17 +143,15 @@ try {
     </head>
   </head>
   <body>
-    <ul>
+    <nav>
         <li><a href="loged.php" class="active"><img src = "photos/add-circle-svgrepo-com.svg" alt="student"/></a></li>
         <li><a href="private/components/stats.php"><img src = "photos/statistics.svg" alt="logout"/></a></li>
         <li><a href="logout.php"><img src = "photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
-    </ul>
+    </nav>
 <?php  echo "<h3>User: " .$_SESSION["meno"]. " " .$_SESSION["priezvisko"]. " (učiteľ)</h3>";?>
 <br>
 <br>
-<article>
-
-
+<section>
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
   <div class="mb-3">
   <label for="mydate" class="form-label">
@@ -197,6 +195,6 @@ try {
   <button type="submit">Submit</button>
   </div>
 </form>
-</article>
+</section>
   </body>
 </html>

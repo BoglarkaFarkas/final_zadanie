@@ -44,7 +44,7 @@
   } catch (PDOException $e) {
       echo $e->getMessage();
   }
-  
+
  ?>
 <!doctype html>
 <html lang="sk">
@@ -61,12 +61,16 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="public/css/style.css">
-  
 
- 
+
+
 </head>
 <body>
-  <article>
+  <div class="buttonsForBil">
+    <button id="sk-button">SK</button>
+    <button id="eng-button">ENG</button>
+  </div>
+  <section>
     <header>
       <hgroup>
           <h1 id="id1">Login:</h1>
@@ -91,10 +95,9 @@
         </form>
         <p id="id7">Nemáte účet? <a href="private/components/registration.php" id='id8'>Zaregistrujte sa</a></p>
       </div>
-      <button id="sk-button">SK</button>
-      <button id="eng-button">ENG</button>
+
     </main>
-  </article>
+  </section>
   <script>
 
 document.getElementById("sk-button").addEventListener("click", function() {

@@ -1,10 +1,10 @@
-<?php 
+<?php
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
     require_once '../config.php';
-    
+
     function is_valid_password($password) {
         // Heslo musí mať aspoň 8 znakov, obsahovať veľké písmeno, číslicu a špeciálny znak
         if (preg_match('/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};:\\\\|,.<>\/?]).{8,}$/', $password)) {
@@ -20,7 +20,7 @@
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
         $confirm_password = trim($_POST['confirm-password']);
-        
+
         //Kontrola unikatnosti a validi emailu
         $sql_check_email = "SELECT * FROM users WHERE email = :email";
         $stmt_check_email = $pdo->prepare($sql_check_email);
@@ -60,7 +60,7 @@
                     ':last_name' => $last_name,
                     ':email' => $email,
                     ':password' => $hashed_password,
-                    ':type' => $type 
+                    ':type' => $type
                 ]);
                 header('Location: ../../index.php');
                 exit;
@@ -79,46 +79,57 @@
     <title>Register</title>
     <!------------------------------------------CSS---------------------------------------->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-    <link href="../../public/css/registration.css" rel="stylesheet">
+    <link href="../../public/css/style.css" rel="stylesheet">
 </head>
 <body>
+  <div class="buttonsForBil">
+    <button id="sk-button">SK</button>
+    <button id="eng-button">ENG</button>
+  </div>
     <section class="py-5">
+      <header>
+        <hgroup>
+            <h1 id="id9">Registrácia</h1>
+          </hgroup>
+      </header>
         <div class="container">
             <form action="" method="post">
-                <div id="id9" class="title">Registrácia</div>
-                <div class="input-box underline fname">
-                    <input type="text" id="first-name" name="first-name" placeholder="Zadaj krstné meno" required>
-                    <div class="underline"></div>
+                <div class="mb-3">
+                    <label for="first-name">
+                    <input class="form-control" type="text" id="first-name" name="first-name" placeholder="Zadaj krstné meno" required>
+                    </label>
+                    <label for="last-name">
+                    <input class="form-control"  type="text" id="last-name" name="last-name" placeholder="Zadaj priezvisko" required>
+                    </label>
                 </div>
-                <div class="input-box underline lname">
-                    <input type="text" id="last-name" name="last-name" placeholder="Zadaj priezvisko" required>
-                    <div class="underline"></div>
-                </div>
-                <div class="input-box underline email">
-                    <input type="email" id="email" name="email" placeholder="Enter Your Email" required>
-                    <div class="underline"></div>
-                </div>
-                <div class="input-box type form-floating">
+
+                <div class="mb-3">
+                  <label for="email">
+                    <input class="form-control" type="email" id="email" name="email" placeholder="Enter Your Email" required>
+                  </label>
+                  <label id="id16" for="floatingSelect">
+              
                     <select class="form-select" name="type" id="floatingSelect" aria-label="Floating label">
                         <option id="id17" value="default" selected>Vyber si svoju rolu</option>
                         <option id="id18" value="student">Študent</option>
                         <option id="id19" value="ucitel">Učiteľ</option>
                     </select>
-                    <label id="id16" for="floatingSelect">Rola</label>
+                    </label>
                 </div>
-                <div class="input-box psw">
-                    <input type="password" id="password" name="password" placeholder="Zadaj heslo" required>
-                    <div class="underline"></div>
+
+                <div class="mb-3">
+                  <label for="password">
+                    <input class="form-control" type="password" id="password" name="password" placeholder="Zadaj heslo" required>
+                  </label>
+                    <label for="confirm-password">
+                    <input class="form-control" type="password" id="confirm-password" name="confirm-password" placeholder="Potvrď heslo" required>
+                    </label>
                 </div>
-                <div class="input-box cpsw">
-                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Potvrď heslo" required>
-                    <div class="underline"></div>
+
+                <div class="mb-3">
+                    <input  id="id15" type="submit" name="" value="Pokračuj">
                 </div>
-                <div class="input-box button">
-                    <input id="id15" type="submit" name="" value="Pokračuj">
-                </div>
-                <button id="sk-button">SK</button>
-                <button id="eng-button">ENG</button>
+
             </form>
         </div>
     </section>
@@ -137,14 +148,10 @@
             document.getElementById("id18").textContent = data.sk.id18;
             document.getElementById("id19").textContent = data.sk.id19;
             document.getElementById("id18").textContent = data.sk.id18;
-            document.getElementById("id16").textContent = data.sk.id16;
+            //document.getElementById("id16").textContent = data.sk.id16;
             document.getElementById("password").placeholder = data.sk.password;
             document.getElementById("confirm-password").placeholder = data.sk.confirmpassword;
             document.getElementById("id15").textContent = data.sk.id15;
-            //document.getElementById("id5").textContent = data.sk.id5;
-            //document.getElementById("id6").textContent = data.sk.id6;
-            //document.getElementById("id7").innerHTML = data.sk.id7 + ' <a href="private/components/registration.php" id="id8">Zaregistrujte sa</a>';
-            // document.getElementById("id8").innerHTML = ' <a href="private/components/registration.php" id="id8">Zaregistrujte sa</a>';
             });
         });
 
@@ -160,14 +167,10 @@
             document.getElementById("id18").textContent = data.eng.id18;
             document.getElementById("id19").textContent = data.eng.id19;
             document.getElementById("id18").textContent = data.eng.id18;
-            document.getElementById("id16").textContent = data.eng.id16;
+          //  document.getElementById("id16").textContent = data.eng.id16;
             document.getElementById("password").placeholder = data.eng.password;
             document.getElementById("confirm-password").placeholder = data.eng.confirmpassword;
             document.getElementById("id15").textContent = data.eng.id15;
-            //document.getElementById("id5").textContent = data.eng.id5;
-            //document.getElementById("id6").textContent = data.eng.id6;
-            //document.getElementById("id7").innerHTML = data.eng.id7 + ' <a href="private/components/registration.php" id="id8">Sign up</a>';
-            //document.getElementById("id8").textContent = data.eng.id8;
             });
         });
 </script>
