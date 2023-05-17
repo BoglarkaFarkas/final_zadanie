@@ -89,6 +89,8 @@ if ($rowCount == 0) {
         $modifiedText = preg_replace($pattern, $imageTag, $text);
 
         echo $modifiedText;
+    } else {
+        echo $text;
     }
 
     ?>
