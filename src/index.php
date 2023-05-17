@@ -108,8 +108,10 @@ document.getElementById("sk-button").addEventListener("click", function() {
       document.getElementById("id2").textContent = data.sk.id2;
       document.getElementById("id3").textContent = data.sk.id3;
       document.getElementById("id4").textContent = data.sk.id4;
-      document.getElementById("id5").textContent = data.sk.id5;
-      document.getElementById("id6").textContent = data.sk.id6;
+     document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("id5").innerHTML = "<div class='alert alert-danger' id='id5'>Nespravny email alebo heslo!</div>";
+      document.getElementById("id6").innerHTML = "<div class='alert alert-danger' id='id6'>Nespravny email alebo heslo!</div>";
+    });
       document.getElementById("id7").innerHTML = data.sk.id7 + ' <a href="private/components/registration.php" id="id8">Zaregistrujte sa</a>';
      // document.getElementById("id8").innerHTML = ' <a href="private/components/registration.php" id="id8">Zaregistrujte sa</a>';
     });
@@ -123,8 +125,10 @@ document.getElementById("eng-button").addEventListener("click", function() {
       document.getElementById("id2").textContent = data.eng.id2;
       document.getElementById("id3").textContent = data.eng.id3;
       document.getElementById("id4").textContent = data.eng.id4;
-      document.getElementById("id5").textContent = data.eng.id5;
-      document.getElementById("id6").textContent = data.eng.id6;
+      document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("id5").innerHTML = "<div class='alert alert-danger' id='id5'>dfghj!</div>";
+      document.getElementById("id6").innerHTML = "<div class='alert alert-danger' id='id6'>Nesfhjhjlo!</div>";
+    });
       document.getElementById("id7").innerHTML = data.eng.id7 + ' <a href="private/components/registration.php" id="id8">Sign up</a>';
       //document.getElementById("id8").textContent = data.eng.id8;
     });
