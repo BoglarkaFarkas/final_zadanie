@@ -106,7 +106,7 @@ if ($rowCount == 0) {
             success: function(response) {
                 console.log(response);
 
-                //window.location.href = 'logedStudent.php';
+                window.location.href = 'logedStudent.php';
             },
             error: function(xhr, status, error) {
                 console.log(xhr + " " + status + " " + error);
