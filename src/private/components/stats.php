@@ -25,6 +25,7 @@
   <nav>
       <li><a href="../../loged.php"><img src = "../../photos/add-circle-svgrepo-com.svg" alt="student"/></a></li>
       <li><a href="stats.php"  class="active"><img src = "../../photos/statistics.svg" alt="logout"/></a></li>
+      <li><a href="teacherPdf.php"><img src = "../../photos/guide-link-svgrepo-com.svg" alt="man"/></a></li>
       <li><a href="../../logout.php"><img src = "../../photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
   </nav>
   <h3 class="py-2" id="id20">Zoznam študentov</h3>
