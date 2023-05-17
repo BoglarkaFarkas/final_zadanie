@@ -4,6 +4,10 @@ if(!isset($_SESSION)){
     header("Location: ../../index.php");
     exit;
 }
+if($_SESSION['role']=='student'){
+    header("Location: ../../logedStudent.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html>
