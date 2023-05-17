@@ -23,6 +23,10 @@ class Table {
         $sql = "SELECT surname FROM users WHERE role = :role";
         return $this->executeQuery($sql, [':role' => $this->role]);
     }
+    private function generatedExcercises($id){
+        $sql = "SELECT * FROM generatedStudnet WHERE id_student = :id";
+        return $this->executeQuery($sql, [':id' =>$id]);
+    }
     private function generateTbody() {
         $html = '<tbody>';
         $ids = $this->getIDs();
