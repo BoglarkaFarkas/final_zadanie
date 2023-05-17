@@ -30,6 +30,10 @@
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 </head>
 <body>
+  <div class="buttonsForBil">
+    <button id="sk-button">SK</button>
+    <button id="eng-button">ENG</button>
+  </div>
   <nav>
       <li><a href="../../loged.php"><img src = "../../photos/add-circle-svgrepo-com.svg" alt="student"/></a></li>
       <li><a href="stats.php"  class="active"><img src = "../../photos/statistics.svg" alt="logout"/></a></li>
@@ -51,10 +55,7 @@
             </div>
 
         </div>
-        <div class="buttonsForBil">
-        <button id="sk-button">SK</button>
-        <button id="eng-button">ENG</button>
-        </div>
+        
     </section>
     <!------------------------------------------JS---------------------------------------->
     <script>
@@ -90,5 +91,5 @@
         });
     </script>
     <script src="../../public/js/exportCSV.js"></script>
-   
+
 </body>

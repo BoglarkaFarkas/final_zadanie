@@ -86,7 +86,7 @@
     <button id="sk-button">SK</button>
     <button id="eng-button">ENG</button>
   </div>
-    <section class="py-5">
+    <section class="mySec">
       <header>
         <hgroup>
             <h1 id="id9">Registrácia</h1>
@@ -108,7 +108,7 @@
                     <input class="form-control" type="email" id="email" name="email" placeholder="Enter Your Email" required>
                   </label>
                   <label id="id16" for="floatingSelect">
-              
+
                     <select class="form-select" name="type" id="floatingSelect" aria-label="Floating label">
                         <option id="id17" value="default" selected>Vyber si svoju rolu</option>
                         <option id="id18" value="student">Študent</option>
@@ -118,6 +118,7 @@
                 </div>
 
                 <div class="mb-3">
+                
                   <label for="password">
                     <input class="form-control" type="password" id="password" name="password" placeholder="Zadaj heslo" required>
                   </label>

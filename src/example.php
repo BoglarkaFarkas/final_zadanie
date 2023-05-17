@@ -60,11 +60,12 @@ if ($rowCount == 0) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.css" />
 </head>
 <body>
-<ul>
+<nav>
     <li><a href="logedStudent.php" class="active"><img src = "photos/profile-circle-svgrepo-com.svg" alt="student"/></a></li>
     <li><a href="logout.php"><img src = "photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
-</ul>
-<?php echo "Hello " .$_SESSION["meno"]. " student"; ?>
+</nav>
+<?php  echo "<h3 id='id31'>Používatel: " .$_SESSION["meno"]. " " .$_SESSION["priezvisko"]. " (študent)</h3>";?>
+<section class="myDivForEx">
 <div>
     <?php
 
@@ -84,11 +85,13 @@ if ($rowCount == 0) {
     if (preg_match($pattern, $text, $matches)) {
         $imageFilename = $matches[1];
 
-        $imageTag = '<img src="' . $imageFilename . '" alt="Picture">';
+        $imageTag = '<img src="' . $imageFilename . '" alt="Picture" class="responsive-image">';
 
         $modifiedText = preg_replace($pattern, $imageTag, $text);
 
         echo $modifiedText;
+    } else {
+        echo $text;
     }
 
     ?>
@@ -101,12 +104,18 @@ if ($rowCount == 0) {
         });
 </script>
 
+
+<div class="myDivForSt">
 <p>Solution: <span id="math-field" style="width: 3rem; height: 1.5rem;"></span></p>
 <form id="form" action="" method="post">
     <input id="latex" name="latex" type="hidden" value="">
     <input id="exampleID" name="exampleID" type="hidden" value="<?php echo $exampleID; ?>">
     <button type="button" onclick="submitForm()">Submit</button>
 </form>
+
+
+</div>
+</section>
 <script>
     function submitForm() {
         let formData = $('#form').serialize();
@@ -141,5 +150,6 @@ if ($rowCount == 0) {
         });
     });
 </script>
+
 </body>
 </html>

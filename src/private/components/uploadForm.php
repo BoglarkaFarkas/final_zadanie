@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if(!isset($_SESSION)){
     header("Location: ../../index.php");
@@ -15,16 +15,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $extension = strtolower(pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION));
     if (in_array($extension, $allowedExtensions)) {
         if ($extension === "jpg" || $extension === "jpeg") {
-            $targetDir = "../../examples/images/"; 
+            $targetDir = "../../examples/images/";
         }
         $targetFile = $targetDir . basename($_FILES["fileToUpload"]["name"]);
-    
+
         // Skontroluje, či súbor už existuje
         if (file_exists($targetFile)) {
             echo '<div class="alert alert-danger">Súbor s týmto názvom už existuje.</div>';
             $uploadOk = 0;
         }
-    
+
         // Skontroluje, či je súbor správneho typu
         if  ($extension === "jpg" || $extension === "jpeg") {
             // skontrolovať, či je súbor SVG
@@ -39,13 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $uploadOk = 0;
             }
         }
-    
+
         // Skontroluje veľkosť súboru
         if ($_FILES["fileToUpload"]["size"] > 500000) {
             echo '<div class="alert alert-danger">Ospravedlňujeme sa, súbor je príliš veľký.</div>';
             $uploadOk = 0;
         }
-    
+
         // Skontroluje, či $uploadOk je nastavené na 0 z nejakej chyby
         if ($uploadOk == 0) {
             echo '<div class="alert alert-danger">Ospravedlňujeme sa, súbor sa nepodarilo nahrať.</div>';
@@ -86,13 +86,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <section>
         <div class="container">
             <form method="post" enctype="multipart/form-data">
-                <div class="title">Nahraj súbor</div>
+                <h1>Nahraj súbor</h1>
                 <div class="my-3">
                     <input class="form-control" type="file" id="fileToUpload" name="fileToUpload">
                 </div>
                 <div class="input-box button">
                     <input type="submit" value="Upload" name="submit">
-                </div>    
+                </div>
             </form>
         </div>
     </section>

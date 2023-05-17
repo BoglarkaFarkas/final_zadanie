@@ -21,12 +21,13 @@ require_once('private/config.php');
     <link rel="stylesheet" href="public/css/style.css">
   </head>
   <body>
-    <ul>
+    <nav>
         <li><a href="logedStudent.php" class="active"><img src = "photos/profile-circle-svgrepo-com.svg" alt="student"/></a></li>
         <li><a href="logout.php"><img src = "photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
-    </ul>
-    <?php echo "Hello " .$_SESSION["meno"]. " student"; ?>
-    <h2>Dostupné testy pre vás</h2>
+    </nav>
+    <?php  echo "<h3 id='id31'>Používatel: " .$_SESSION["meno"]. " " .$_SESSION["priezvisko"]. " (študent)</h3>";?>
+    <h4>Dostupné testy pre vás</h4>
+
 
   <?php
   $sql = "SELECT DISTINCT file_name, start_date, deadline_date, points FROM examples WHERE (start_date IS NULL AND deadline_date IS NULL AND solvable = 1) OR (start_date IS NOT NULL AND deadline_date IS NOT NULL AND solvable = 1 AND NOW() BETWEEN start_date AND deadline_date);";
@@ -36,7 +37,7 @@ require_once('private/config.php');
 
   foreach ($tests as $row) {
 
-      echo "Name:   " . $row['file_name'] . "<br>";
+      echo "<section> Name:   " . $row['file_name'] . "<br>";
 
       if (empty($row['start_date']) && empty($row['deadline_date'])) {
           echo "There is no time limit" . "<br>";
@@ -78,7 +79,7 @@ require_once('private/config.php');
 
       if ($example_count == $solved_example_count) {
 
-          echo "Every example solved from this test";
+          echo "Every example solved from this test</section>";
 
       } else {
           if ($foundNull) {
@@ -98,8 +99,8 @@ require_once('private/config.php');
                   $_SESSION['exampleID'] = $id_example;
 
                   echo '<form method="post" action="example.php">';
-                  echo '<input type="submit" value="Continue" onclick="redirect()">';
-                  echo '</form>';
+                  echo '<input type="submit" id="continueBut" value="Continue" onclick="redirect()">';
+                  echo '</form> </section>';
 
               }
           }
@@ -119,8 +120,8 @@ require_once('private/config.php');
                $_SESSION['exampleID'] = $randomExample['id'];
 
                echo '<form method="post" action="example.php">';
-               echo '<input type="submit" value="New example" onclick="redirect()">';
-               echo '</form>';
+               echo '<input type="submit" id="continueBut2" value="New example" onclick="redirect()">';
+               echo '</form></section>';
           }
       }
   }
@@ -131,5 +132,6 @@ require_once('private/config.php');
           window.location.href = 'example.php';
       }
   </script>
+  </section>
   </body>
 </html>

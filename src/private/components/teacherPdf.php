@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if(!isset($_SESSION)){
     header("Location: ../../index.php");
@@ -28,7 +28,7 @@ if($_SESSION['role']=='student'){
         <li><a href="uploadForm.php"><img src = "../../photos/upload-svgrepo-com.svg" alt="upload"/></a></li>
         <li><a href="../../logout.php"><img src = "../../photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
     </nav>
-    <div class="container my-5 shadow p-3 mb-5 bg-light rounded">
+    <section>
         <div class="row justify-content-center pt-5">
             <div class="col-lg-6 text-center">
                 <h1>Manual</h1>
@@ -50,12 +50,11 @@ if($_SESSION['role']=='student'){
             <div class="col-lg-6 text-center pb-5">
                 <form method="post" action="generate_pdf.php">
                     <input type="hidden" name="pdf_content" id="pdfContentInput">
-                    <input type="submit" class="btn btn-primary" name="generate_pdf" value="Stiahnuť PDF">
+                    <input type="submit" class="myButtonForm2" name="generate_pdf" value="Stiahnuť PDF">
                 </form>
             </div>
         </div>
-    </div>
-
+  </section>
 
     <script>
         window.onload = function() {
