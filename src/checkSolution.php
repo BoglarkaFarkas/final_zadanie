@@ -23,11 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['latex']) && isset($_P
 
     if(trim(normalizeTeX($_POST['latex'])) === trim(normalizeTeX($solution))) {
         $status = 1;
+        $response = array('status' => 'correct', 'message' => 'Correct answer!');
     } else {
         $status = 0;
+        $response = array('status' => 'incorrect', 'message' => 'Incorrect answer!');
     }
-
-    echo $_POST['latex'] . " " . $solution;
 
     $sql = "UPDATE generatedExamples SET status = :status WHERE id_student = :id_student AND id_example = :id_example";
     $stmt = $pdo->prepare($sql);
@@ -35,6 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['latex']) && isset($_P
     $stmt->bindParam(':id_example', $_POST['exampleID'], PDO::PARAM_INT);
     $stmt->bindParam(':status', $status, PDO::PARAM_INT);
     $stmt->execute();
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
 
     unset($_POST['latex']);
     unset($_POST['exampleID']);

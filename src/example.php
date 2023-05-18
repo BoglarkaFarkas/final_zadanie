@@ -106,7 +106,7 @@ if ($rowCount == 0) {
 
 
 <div class="myDivForSt">
-<p>Solution: <span id="math-field" style="width: 3rem; height: 1.5rem;"></span></p>
+<p>Solution: <span id="math-field"></span></p>
 <form id="form" action="" method="post">
     <input id="latex" name="latex" type="hidden" value="">
     <input id="exampleID" name="exampleID" type="hidden" value="<?php echo $exampleID; ?>">
@@ -125,8 +125,7 @@ if ($rowCount == 0) {
             url: 'checkSolution.php',
             data: formData,
             success: function(response) {
-                console.log(response);
-
+                alert(response.message);
                 window.location.href = 'logedStudent.php';
             },
             error: function(xhr, status, error) {
