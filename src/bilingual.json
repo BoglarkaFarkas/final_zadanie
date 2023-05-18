@@ -58,7 +58,8 @@
     "id53": "Môžete vygenerovať nový príklad",
     "continueBut": "Pokračovať",
     "continueBut2": "Nový príklad",
-    "id54": "Príklad už existuje:"
+    "id54": "Príklad už existuje:",
+    "id55": "Riešenie:"
 
 
    
@@ -125,7 +126,8 @@
   "id53": "You can generate a new example",
   "continueBut": "Continue",
   "continueBut2": "New example",
-  "id54": "There is an already started example:"
+  "id54": "There is an already started example:",
+  "id55": "Solution:"
 
   }
 }

@@ -60,11 +60,15 @@ if ($rowCount == 0) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.css" />
 </head>
 <body>
+<div class="buttonsForBil">
+    <button id="sk-button">SK</button>
+    <button id="eng-button">ENG</button>
+</div>
 <nav>
     <li><a href="logedStudent.php" class="active"><img src = "photos/profile-circle-svgrepo-com.svg" alt="student"/></a></li>
     <li><a href="logout.php"><img src = "photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
 </nav>
-<?php  echo "<h3 id='id31'>Používatel: " .$_SESSION["meno"]. " " .$_SESSION["priezvisko"]. " (študent)</h3>";?>
+<?php  echo "<h3 id='id48'>Používatel: " .$_SESSION["meno"]. " " .$_SESSION["priezvisko"]. " (študent)</h3>";?>
 <section class="myDivForEx">
 <div>
     <?php
@@ -106,11 +110,11 @@ if ($rowCount == 0) {
 
 
 <div class="myDivForSt">
-<p>Solution: <span id="math-field"></span></p>
+<p id="id55">Solution: <span id="math-field"></span></p>
 <form id="form" action="" method="post">
     <input id="latex" name="latex" type="hidden" value="">
     <input id="exampleID" name="exampleID" type="hidden" value="<?php echo $exampleID; ?>">
-    <button type="button" onclick="submitForm()">Submit</button>
+    <button type="button" id='id30' onclick="submitForm()">Submit</button>
 </form>
 
 
@@ -146,6 +150,35 @@ if ($rowCount == 0) {
                     latex.value = mathField.latex();
                 }
             }
+        });
+    });
+</script>
+<script>
+    document.getElementById("sk-button").addEventListener("click", function() {
+    fetch('bilingual.json')
+        .then(response => response.json())
+        .then(data => {
+        document.getElementById("id55").textContent = data.sk.id55;
+        var first = "<?php echo $_SESSION["meno"]; ?>";
+        var second = "<?php echo $_SESSION["priezvisko"]; ?>";
+        var elem = "<h3 id='id48'>Používatel: " + first + " " + second + " (študent)</h3>";
+        document.getElementById("id48").innerHTML = elem;
+        document.getElementById("id30").textContent = data.sk.id30;
+
+        });
+    });
+
+    document.getElementById("eng-button").addEventListener("click", function() {
+    fetch('bilingual.json')
+        .then(response => response.json())
+        .then(data => {
+        document.getElementById("id55").textContent = data.eng.id55;
+        var first = "<?php echo $_SESSION["meno"]; ?>";
+        var second = "<?php echo $_SESSION["priezvisko"]; ?>";
+        var elem = "<h3 id='id48'>User: " + first + " " + second + " (student)</h3>";
+        document.getElementById("id48").innerHTML = elem;
+        document.getElementById("id30").textContent = data.eng.id30;
+
         });
     });
 </script>
