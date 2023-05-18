@@ -29,23 +29,28 @@
         ]);
         // Kontrola platnosti emailu
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo '<div class="alert alert-danger">Neplatny email.</div>';
+            $displayStyle = 'block'; 
+            //echo '<div class="alert alert-danger">Neplatny email.</div>';
         }
         //Kontrola zhody
         elseif ($stmt_check_email->rowCount() > 0) {
-            echo '<div class="alert alert-danger">Tento email je už registrovaný.</div>';
+            $displayStyle1 = 'block'; 
+            //echo '<div class="alert alert-danger">Tento email je už registrovaný.</div>';
         }
         // Kontrola, či zadané heslo spĺňa požiadavky
         elseif (!is_valid_password($password)) {
-            echo '<div class="alert alert-danger">Heslo musí mať aspoň 8 znakov, obsahovať veľké písmeno, číslicu a špeciálny znak.</div>';
+            $displayStyle2 = 'block'; 
+            //echo '<div class="alert alert-danger">Heslo musí mať aspoň 8 znakov, obsahovať veľké písmeno, číslicu a špeciálny znak.</div>';
         }
         // Kontrola zhody hesiel
         elseif ($password != $confirm_password) {
-            echo '<div class="alert alert-danger">Heslá sa nezhodujú.</div>';
+            $displayStyle3 = 'block'; 
+            //echo '<div class="alert alert-danger">Heslá sa nezhodujú.</div>';
         }
         // Kontrola vyberu role
         elseif ($type == "default"){
-            echo '<div class="alert alert-danger">Vyberte si svoju rolu.</div>';
+            $displayStyle4 = 'block'; 
+            //echo '<div class="alert alert-danger">Vyberte si svoju rolu.</div>';
         }
         else{
             // Hashovanie hesla
@@ -80,8 +85,19 @@
     <!------------------------------------------CSS---------------------------------------->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link href="../../public/css/style.css" rel="stylesheet">
+    <style>
+        #id35,#id36,#id37,#id38,#id39{
+            display:none;
+        }
+    </style>
 </head>
 <body>
+<div class="alert alert-danger" id="id35" style="display: <?php echo $displayStyle; ?>">Neplatny email.</div>
+<div class="alert alert-danger" id="id36" style="display: <?php echo $displayStyle1; ?>">Tento email je už registrovaný.</div>
+<div class="alert alert-danger" id="id37" style="display: <?php echo $displayStyle2; ?>">Heslo musí mať aspoň 8 znakov, obsahovať veľké písmeno, číslicu a špeciálny znak.</div>
+<div class="alert alert-danger" id="id38" style="display: <?php echo $displayStyle3; ?>">Heslá sa nezhodujú.</div>
+<div class="alert alert-danger" id="id39" style="display: <?php echo $displayStyle4; ?>">Vyberte si svoju rolu.</div>
+
   <div class="buttonsForBil">
     <button id="sk-button">SK</button>
     <button id="eng-button">ENG</button>
@@ -148,11 +164,17 @@
             document.getElementById("id17").textContent = data.sk.id17;
             document.getElementById("id18").textContent = data.sk.id18;
             document.getElementById("id19").textContent = data.sk.id19;
-            document.getElementById("id18").textContent = data.sk.id18;
+            document.getElementById("id35").textContent = data.sk.id35;
+            document.getElementById("id36").textContent = data.sk.id36;
+            document.getElementById("id37").textContent = data.sk.id37;
+            document.getElementById("id38").textContent = data.sk.id38;
+            document.getElementById("id39").textContent = data.sk.id39;
             //document.getElementById("id16").textContent = data.sk.id16;
             document.getElementById("password").placeholder = data.sk.password;
             document.getElementById("confirm-password").placeholder = data.sk.confirmpassword;
             document.getElementById("id15").textContent = data.sk.id15;
+            
+
             });
         });
 
@@ -167,7 +189,11 @@
             document.getElementById("id17").textContent = data.eng.id17;
             document.getElementById("id18").textContent = data.eng.id18;
             document.getElementById("id19").textContent = data.eng.id19;
-            document.getElementById("id18").textContent = data.eng.id18;
+            document.getElementById("id35").textContent = data.eng.id35;
+            document.getElementById("id36").textContent = data.eng.id36;
+            document.getElementById("id37").textContent = data.eng.id37;
+            document.getElementById("id38").textContent = data.eng.id38;
+            document.getElementById("id39").textContent = data.eng.id39;
           //  document.getElementById("id16").textContent = data.eng.id16;
             document.getElementById("password").placeholder = data.eng.password;
             document.getElementById("confirm-password").placeholder = data.eng.confirmpassword;

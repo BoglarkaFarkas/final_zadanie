@@ -21,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         // Skontroluje, či súbor už existuje
         if (file_exists($targetFile)) {
-            echo '<div class="alert alert-danger">Súbor s týmto názvom už existuje.</div>';
+            $displayStyle = 'block'; 
+            //echo '<div class="alert alert-danger">Súbor s týmto názvom už existuje.</div>';
             $uploadOk = 0;
         }
 
@@ -29,36 +30,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         if  ($extension === "jpg" || $extension === "jpeg") {
             // skontrolovať, či je súbor SVG
             if ($_FILES["fileToUpload"]["type"] !== "image/jpeg" && $_FILES["fileToUpload"]["type"] !== "image/jpg")  {
-                echo '<div class="alert alert-danger">Obrázky môžu byť iba vo formáte jpg.</div>';
+                $displayStyle1 = 'block'; 
+                //echo '<div class="alert alert-danger">Obrázky môžu byť iba vo formáte jpg.</div>';
                 $uploadOk = 0;
             }
         } elseif ($extension === "tex") {
             // skontrolovať, či je súbor TeX
             if ($_FILES["fileToUpload"]["type"] !== "application/x-tex" && $_FILES["fileToUpload"]["type"] !== "application/x-latex") {
-                echo '<div class="alert alert-danger">Zadania môžu byť iba vo formáte tex.</div>';
+                $displayStyle2 = 'block'; 
+                //echo '<div class="alert alert-danger">Zadania môžu byť iba vo formáte tex.</div>';
                 $uploadOk = 0;
             }
         }
 
         // Skontroluje veľkosť súboru
         if ($_FILES["fileToUpload"]["size"] > 500000) {
-            echo '<div class="alert alert-danger">Ospravedlňujeme sa, súbor je príliš veľký.</div>';
+            $displayStyle3 = 'block'; 
+            //echo '<div class="alert alert-danger">Ospravedlňujeme sa, súbor je príliš veľký.</div>';
             $uploadOk = 0;
         }
 
         // Skontroluje, či $uploadOk je nastavené na 0 z nejakej chyby
         if ($uploadOk == 0) {
-            echo '<div class="alert alert-danger">Ospravedlňujeme sa, súbor sa nepodarilo nahrať.</div>';
+            $displayStyle4 = 'block'; 
+            //echo '<div class="alert alert-danger">Ospravedlňujeme sa, súbor sa nepodarilo nahrať.</div>';
         } else {
             // Pokús sa nahrať súbor
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
                 echo '<div class="alert alert-success">Súbor '. basename($_FILES["fileToUpload"]["name"]) . ' bol úspešne nahraný.</div>';
             } else {
-                echo '<div class="alert alert-danger">Ospravedlňujeme sa, vyskytla sa chyba pri nahrávaní súboru.</div>';
+                $displayStyle6 = 'block'; 
+                //echo '<div class="alert alert-danger">Ospravedlňujeme sa, vyskytla sa chyba pri nahrávaní súboru.</div>';
             }
         }
     } else {
-        echo '<div class="alert alert-danger">Ospravedlňujeme sa, nepovolená prípona súboru.</div>';
+        $displayStyle7 = 'block'; 
+        //echo '<div class="alert alert-danger">Ospravedlňujeme sa, nepovolená prípona súboru.</div>';
     }
 }
 ?>
@@ -74,9 +81,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link href="../../public/css/upload-form.css" rel="stylesheet">
     <link href="../../public/css/nav.css" rel="stylesheet">
+    <style>
+        #id40,#id41,#id42,#id43,#id44,#id45,#id46{
+            display:none;
+        }
+    </style>
     
 </head>
 <body>
+<div class="alert alert-danger" id="id40" style="display: <?php echo $displayStyle; ?>">Súbor s týmto názvom už existuje.</div>
+<div class="alert alert-danger" id="id41" style="display: <?php echo $displayStyle1; ?>">Obrázky môžu byť iba vo formáte jpg.</div>
+<div class="alert alert-danger" id="id42" style="display: <?php echo $displayStyle2; ?>">Zadania môžu byť iba vo formáte tex.</div>
+<div class="alert alert-danger" id="id43" style="display: <?php echo $displayStyle3; ?>">Ospravedlňujeme sa, súbor je príliš veľký.</div>
+<div class="alert alert-danger" id="id44" style="display: <?php echo $displayStyle4; ?>">Ospravedlňujeme sa, súbor sa nepodarilo nahrať.</div>
+<div class="alert alert-danger" id="id45" style="display: <?php echo $displayStyle6; ?>">Ospravedlňujeme sa, vyskytla sa chyba pri nahrávaní súboru.</div>
+<div class="alert alert-danger" id="id46" style="display: <?php echo $displayStyle7; ?>">Ospravedlňujeme sa, nepovolená prípona súboru.</div>
+
 <div class="buttonsForBil">
     <button id="sk-button">SK</button>
     <button id="eng-button">ENG</button>
@@ -112,7 +132,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             .then(data => {
             document.getElementById("id32").textContent = data.sk.id32;
             document.getElementById("id33").value = "Nahrať";
-            //document.getElementById("fileToUpload").textContent = "Vybrať súbor";
+            document.getElementById("id40").textContent = data.sk.id40;
+            document.getElementById("id41").textContent = data.sk.id41;
+            document.getElementById("id42").textContent = data.sk.id42;
+            document.getElementById("id43").textContent = data.sk.id43;
+            document.getElementById("id44").textContent = data.sk.id44;
+            document.getElementById("id45").textContent = data.sk.id45;
+            document.getElementById("id46").textContent = data.sk.id46;
             });
         });
 
@@ -122,7 +148,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             .then(data => {
             document.getElementById("id32").textContent = data.eng.id32;
             document.getElementById("id33").value = "Upload";
-            //document.getElementById("fileToUpload").textContent = "Select a file";
+            document.getElementById("id40").textContent = data.eng.id40;
+            document.getElementById("id41").textContent = data.eng.id41;
+            document.getElementById("id42").textContent = data.eng.id42;
+            document.getElementById("id43").textContent = data.eng.id43;
+            document.getElementById("id44").textContent = data.eng.id44;
+            document.getElementById("id45").textContent = data.eng.id45;
+            document.getElementById("id46").textContent = data.eng.id46;
             });
         });
     </script>

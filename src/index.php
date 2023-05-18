@@ -28,14 +28,17 @@
                       header("location: loged.php");
                   }
               }else {
-                echo '<div class="alert alert-danger" id="id5">Nespravny email alebo heslo.</div>';
+                $displayStyle = 'block'; 
+                //echo '<div class="alert alert-danger" id="id5">Nespravny email alebo heslo.</div>';
               }
 
           }else{
-            echo '<div class="alert alert-danger" id="id5">Nespravny email alebo heslo.</div>';
+            $displayStyle = 'block'; 
+            //echo '<div class="alert alert-danger" id="id5">Nespravny email alebo heslo.</div>';
           }
         }else{
-          echo '<div class="alert alert-danger" id="id6">Ups. Nieco sa pokazilo.</div>';
+          $displayStyle1 = 'block'; 
+          //echo '<div class="alert alert-danger" id="id6">Ups. Nieco sa pokazilo.</div>';
         }
         unset($stmt);
         unset($pdo);
@@ -61,11 +64,17 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="public/css/style.css">
-
+<style>
+  #id5,#id6{
+    display:none;
+  }
+</style>
 
 
 </head>
 <body>
+<div class="alert alert-danger" id="id6" style="display: <?php echo $displayStyle; ?>">Ups. Nieco sa pokazilo.</div>
+<div class="alert alert-danger" id="id5" style="display: <?php echo $displayStyle1; ?>">Nespravny email alebo heslo.</div>
   <div class="buttonsForBil">
     <button id="sk-button">SK</button>
     <button id="eng-button">ENG</button>
@@ -108,10 +117,8 @@ document.getElementById("sk-button").addEventListener("click", function() {
       document.getElementById("id2").textContent = data.sk.id2;
       document.getElementById("id3").textContent = data.sk.id3;
       document.getElementById("id4").textContent = data.sk.id4;
-     document.addEventListener("DOMContentLoaded", function() {
-      document.getElementById("id5").innerHTML = "<div class='alert alert-danger' id='id5'>Nespravny email alebo heslo!</div>";
-      document.getElementById("id6").innerHTML = "<div class='alert alert-danger' id='id6'>Nespravny email alebo heslo!</div>";
-    });
+      document.getElementById("id5").textContent = data.sk.id5;
+      document.getElementById("id6").textContent = data.sk.id6;
       document.getElementById("id7").innerHTML = data.sk.id7 + ' <a href="private/components/registration.php" id="id8">Zaregistrujte sa</a>';
      // document.getElementById("id8").innerHTML = ' <a href="private/components/registration.php" id="id8">Zaregistrujte sa</a>';
     });
@@ -125,10 +132,8 @@ document.getElementById("eng-button").addEventListener("click", function() {
       document.getElementById("id2").textContent = data.eng.id2;
       document.getElementById("id3").textContent = data.eng.id3;
       document.getElementById("id4").textContent = data.eng.id4;
-      document.addEventListener("DOMContentLoaded", function() {
-      document.getElementById("id5").innerHTML = "<div class='alert alert-danger' id='id5'>dfghj!</div>";
-      document.getElementById("id6").innerHTML = "<div class='alert alert-danger' id='id6'>Nesfhjhjlo!</div>";
-    });
+      document.getElementById("id5").textContent = data.eng.id5;
+      document.getElementById("id6").textContent = data.eng.id6;
       document.getElementById("id7").innerHTML = data.eng.id7 + ' <a href="private/components/registration.php" id="id8">Sign up</a>';
       //document.getElementById("id8").textContent = data.eng.id8;
     });
