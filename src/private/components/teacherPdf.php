@@ -21,6 +21,10 @@ if($_SESSION['role']=='student'){
     <link href="../../public/css/man.css" rel="stylesheet">
 </head>
 <body>
+<div class="buttonsForBil">
+    <button id="sk-button">SK</button>
+    <button id="eng-button">ENG</button>
+  </div>
     <nav>
         <li><a href="../../loged.php"><img src = "../../photos/add-circle-svgrepo-com.svg" alt="student"/></a></li>
         <li><a href="stats.php"><img src = "../../photos/statistics.svg" alt="stats"/></a></li>
@@ -31,7 +35,7 @@ if($_SESSION['role']=='student'){
     <section>
         <div class="row justify-content-center pt-5">
             <div class="col-lg-6 text-center">
-                <h1>Manual</h1>
+                <h1 id="id31">Manual</h1>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -50,7 +54,7 @@ if($_SESSION['role']=='student'){
             <div class="col-lg-6 text-center pb-5">
                 <form method="post" action="generate_pdf.php">
                     <input type="hidden" name="pdf_content" id="pdfContentInput">
-                    <input type="submit" class="myButtonForm2" name="generate_pdf" value="Stiahnuť PDF">
+                    <input type="submit" class="myButtonForm2" id="id34" name="generate_pdf" value="Stiahnuť PDF">
                 </form>
             </div>
         </div>
@@ -63,5 +67,27 @@ if($_SESSION['role']=='student'){
         };
     </script>
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+     <script>
+
+        document.getElementById("sk-button").addEventListener("click", function() {
+        fetch('../../bilingual.json')
+            .then(response => response.json())
+            .then(data => {
+            document.getElementById("id31").textContent = data.sk.id31;
+            document.getElementById("pdfContent").innerHTML = "Po prihlásení učiteľ vidí ovládací panel, v ktorom môže nastaviť body, dátum odovzdania a dátum spustenia hociktorému súboru dostupnému na stránke. V ľavom hornom rohu stránky je menu, kde je možnosť presunúť sa na podstránku obsahujúcu štatistiku. Štatistika obsahuje zoznam všetkých študentov s informáciami: id, meno, priezvisko, počet dosiahnutých bodov, počet vygenerovaných úloh a počet úspešne vyriešených úloh. Tabuľku študentov je možné si stiahnuť vo formáte csv po kliknutí na tlačidlo. Poslednou podstránkou je tento manuál, ktorý je taktiež možné stiahnuť po kliknutí na tlačidlo vo formáte pdf.";
+            document.getElementById("id34").value = "Stiahnuť PDF";
+            });
+        });
+
+        document.getElementById("eng-button").addEventListener("click", function() {
+        fetch('../../bilingual.json')
+            .then(response => response.json())
+            .then(data => {
+            document.getElementById("id31").textContent = data.eng.id31;
+            document.getElementById("pdfContent").innerHTML = "After logging in, the teacher sees a control panel where he can set points, submission date and start date to any file available on the site. In the upper left corner of the page there is a menu where you can move to a subpage containing statistics. Statistics contains a list of all students with information: id, name, surname, number of points achieved, number of generated tasks and number of successfully solved tasks. Table students can be downloaded in csv format by clicking the button. The last subpage is this manual, which can also be downloaded by clicking the button in pdf format.";
+            document.getElementById("id34").value = "Download PDF";
+            });
+        });
+    </script>
 </body>
 </html>

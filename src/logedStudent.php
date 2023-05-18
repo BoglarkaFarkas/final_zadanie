@@ -34,12 +34,16 @@ require_once('private/config.php');
     <link rel="stylesheet" href="public/css/style.css">
   </head>
   <body>
+  <div class="buttonsForBil">
+    <button id="sk-button">SK</button>
+    <button id="eng-button">ENG</button>
+  </div>
     <nav>
         <li><a href="logedStudent.php" class="active"><img src = "photos/profile-circle-svgrepo-com.svg" alt="student"/></a></li>
         <li><a href="logout.php"><img src = "photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
     </nav>
-    <?php  echo "<h3 id='id31'>Používatel: " .$_SESSION["meno"]. " " .$_SESSION["priezvisko"]. " (študent)</h3>";?>
-    <h4>Dostupné testy pre vás</h4>
+    <?php  echo "<h3 id='id48'>Používatel: " .$_SESSION["meno"]. " " .$_SESSION["priezvisko"]. " (študent)</h3>";?>
+    <h4 id="id47">Dostupné testy pre vás</h4>
 
 
   <?php
@@ -50,16 +54,16 @@ require_once('private/config.php');
 
   foreach ($tests as $row) {
 
-      echo "<section> Name:   " . $row['file_name'] . "<br>";
+      echo "<section> <p id='id49'>Name: </p>  " . $row['file_name'] . "<br>";
 
       if (empty($row['start_date']) && empty($row['deadline_date'])) {
           echo "There is no time limit" . "<br>";
       } else {
-          echo "Start:   " . $row['start_date'] . "<br>";
-          echo "End:   " . $row['deadline_date'] . "<br>";
+          echo "<p id='id50'> Start: </p>   " . $row['start_date'] . "<br>";
+          echo "<p id='id51'> End: </p>  " . $row['deadline_date'] . "<br>";
       }
 
-      echo "Points for a right answer:   " . $row['points'] . "<br>";
+      echo "<p id='id52'> Points for a right answer:  </p> " . $row['points'] . "<br>";
       echo "<br>";
 
       checkSolvedExamples($pdo, $row['file_name'], $_SESSION['id']);
@@ -107,7 +111,7 @@ require_once('private/config.php');
                   $stmt->execute();
                   $exampleToContinue = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                  echo "There is an already started example<br>";
+                  echo "<p id='id54'> There is an already started example: </p> ";
                   echo $exampleToContinue['example_name'];
 
                   echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
@@ -119,7 +123,7 @@ require_once('private/config.php');
           }
            else {
 
-              echo "You can generate a new example";
+              echo "<p id='id53'> You can generate a new example </p>";
 
               // Pick a random row from the solvable ones
                $sql = "SELECT * FROM examples e WHERE e.file_name = :file_name AND e.id NOT IN ( SELECT id_example FROM generatedExamples WHERE id_student = :id_student ) ORDER BY RAND() LIMIT 1;";
@@ -144,5 +148,49 @@ require_once('private/config.php');
       }
   </script>
   </section>
+  <script>
+    document.getElementById("sk-button").addEventListener("click", function() {
+    fetch('bilingual.json')
+        .then(response => response.json())
+        .then(data => {
+        document.getElementById("id47").textContent = data.sk.id47;
+        var first = "<?php echo $_SESSION["meno"]; ?>";
+        var second = "<?php echo $_SESSION["priezvisko"]; ?>";
+        var elem = "<h3 id='id48'>Pouzivatel: " + first + " " + second + " (študent)</h3>";
+
+        document.getElementById("id48").innerHTML = elem;
+        document.getElementById("id49").textContent = data.sk.id49;
+        document.getElementById("id50").textContent = data.sk.id50;
+        document.getElementById("id51").textContent = data.sk.id51;
+        document.getElementById("id52").textContent = data.sk.id52;
+        document.getElementById("id54").textContent = data.sk.id54;
+        document.getElementById("continueBut").value = "Pokračovať";
+        document.getElementById("id53").textContent = data.sk.id53;
+        document.getElementById("continueBut2").value = "Nový príklad";
+
+        });
+    });
+
+    document.getElementById("eng-button").addEventListener("click", function() {
+    fetch('bilingual.json')
+        .then(response => response.json())
+        .then(data => {
+        document.getElementById("id47").textContent = data.eng.id47;
+        var first = "<?php echo $_SESSION["meno"]; ?>";
+        var second = "<?php echo $_SESSION["priezvisko"]; ?>";
+        var elem = "<h3 id='id48'>User: " + first + " " + second + " (student)</h3>";
+
+        document.getElementById("id48").innerHTML = elem;
+        document.getElementById("id49").textContent = data.eng.id49;
+        document.getElementById("id50").textContent = data.eng.id50;
+        document.getElementById("id51").textContent = data.eng.id51;
+        document.getElementById("id52").textContent = data.eng.id52;
+        document.getElementById("id54").textContent = data.eng.id54;
+        document.getElementById("continueBut").value = "Continue";
+        document.getElementById("id53").textContent = data.eng.id53;
+        document.getElementById("continueBut2").value = "New example";
+        });
+    });
+</script>
   </body>
 </html>

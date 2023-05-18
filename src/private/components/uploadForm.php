@@ -74,8 +74,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link href="../../public/css/upload-form.css" rel="stylesheet">
     <link href="../../public/css/nav.css" rel="stylesheet">
+    
 </head>
 <body>
+<div class="buttonsForBil">
+    <button id="sk-button">SK</button>
+    <button id="eng-button">ENG</button>
+  </div>
     <nav>
         <li><a href="../../loged.php"><img src = "../../photos/add-circle-svgrepo-com.svg" alt="student"/></a></li>
         <li><a href="stats.php"><img src = "../../photos/statistics.svg" alt="stats"/></a></li>
@@ -86,12 +91,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <section>
         <div class="container">
             <form method="post" enctype="multipart/form-data">
-                <h1>Nahraj súbor</h1>
+                <h1 id="id32">Nahraj súbor</h1>
                 <div class="my-3">
                     <input class="form-control" type="file" id="fileToUpload" name="fileToUpload">
                 </div>
                 <div class="input-box button">
-                    <input type="submit" value="Upload" name="submit">
+                    <input type="submit" id="id33" value="Upload" name="submit">
                 </div>
             </form>
         </div>
@@ -99,5 +104,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     <!------------------------------------------JS---------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+    <script>
+
+        document.getElementById("sk-button").addEventListener("click", function() {
+        fetch('../../bilingual.json')
+            .then(response => response.json())
+            .then(data => {
+            document.getElementById("id32").textContent = data.sk.id32;
+            document.getElementById("id33").value = "Nahrať";
+            //document.getElementById("fileToUpload").textContent = "Vybrať súbor";
+            });
+        });
+
+        document.getElementById("eng-button").addEventListener("click", function() {
+        fetch('../../bilingual.json')
+            .then(response => response.json())
+            .then(data => {
+            document.getElementById("id32").textContent = data.eng.id32;
+            document.getElementById("id33").value = "Upload";
+            //document.getElementById("fileToUpload").textContent = "Select a file";
+            });
+        });
+    </script>
 </body>
 </html>
