@@ -25,22 +25,30 @@ Ak by sa nenačítal script na init databázy tak pred spustením kontajnera: ` 
 
 
 ### Databáza
-http://localhost:8081/
+http://localhost:8081/ - ak si to spustíte pomocou docker compose u seba
 
 Prihlasovacie meno: `webtefinal`
 
 Heslo: `password`
 
-Tabuľka: myUserPanel
+Tabuľka: users
 
 Táto tabuľka slúži na ukldanie používateľov.
 Role: 
-- Študent
-- Učiteľ
+- student
+- ucitel
 
-| meno | priezvisko | email | heslo | role|
-|------|:----------:|:-----:|:-----:|----:|
+| id | name | surname | email | password | role|
+|----|:----:|:----------:|:-----:|:-----:|----:|
 
+Tabuľka: generatedExamples
+
+| id | id_student | id_example | status |
+|----|:----------:|:----------:|-------:|
+
+Tabuľka: examples
+| id | file_name | example_name | example_body | solution | start_date | deadline_date | points| solvable |
+|----|:---------:|:------------:|:------------:|:--------:|:----------:|:-------------:|:-----:|----:|
 
 ## Tech Stack
 
@@ -49,3 +57,11 @@ Role:
 **Server:** PHP
 
 **DB:** MySQL
+
+**Libs:** TCPDF, MathJax, Mathquill, jQuery
+
+## Nesplnené časti zadania
+- ekvivalencia zápisu a vyhodnotenia odpovedí
+
+## Upozornenie
+Úlohy existujú až keď existuje aspoň jeden učiteľ
