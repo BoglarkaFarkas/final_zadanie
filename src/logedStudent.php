@@ -40,6 +40,7 @@ require_once('private/config.php');
   </div>
     <nav>
         <li><a href="logedStudent.php" class="active"><img src = "photos/profile-circle-svgrepo-com.svg" alt="student"/></a></li>
+        <li><a href="private/components/studentPdf.php"><img src = "photos/guide-link-svgrepo-com.svg" alt="man"/></a></li>
         <li><a href="logout.php"><img src = "photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
     </nav>
     <?php  echo "<h3 id='id48'>User: " .$_SESSION["meno"]. " " .$_SESSION["priezvisko"]. " (student)</h3>";?>
