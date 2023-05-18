@@ -59,9 +59,10 @@
     "continueBut": "Pokračovať",
     "continueBut2": "Nový príklad",
     "id54": "Príklad už existuje:",
-    "id55": "Riešenie:"
-
-
+    "id55": "Riešenie:",
+    "id56": "Vygenerované príklady",
+    "id57": "Odovzdané",
+    "id58": "Body"
    
 
 
@@ -127,7 +128,9 @@
   "continueBut": "Continue",
   "continueBut2": "New example",
   "id54": "There is an already started example:",
-  "id55": "Solution:"
-
+  "id55": "Solution:",
+  "id56": "Generated excercises",
+  "id57": "Submitted",
+  "id58": "Points"
   }
 }

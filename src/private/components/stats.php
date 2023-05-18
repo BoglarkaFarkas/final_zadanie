@@ -61,7 +61,14 @@
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable({
-              searching: false
+              searching: false,
+              "columnDefs": [
+                { "orderData": [5, 2], "targets": 5 }, 
+                { "orderData": [2], "targets": 2 } 
+                ],
+                "paging": false, // Skryť stránkovanie
+                "lengthChange": false,
+                "info": false
             });
         } );
     </script>
@@ -75,6 +82,9 @@
             document.getElementById("id23").textContent = "ID";
             document.getElementById("id21").textContent = "Meno";
             document.getElementById("id22").textContent = "Priezvisko";
+            document.getElementById("id56").textContent = "Vygenerované príklady";
+            document.getElementById("id57").textContent = "Odovzdané";
+            document.getElementById("id58").textContent = "Body";
             });
         });
 
@@ -87,6 +97,9 @@
             document.getElementById("id23").textContent = "ID";
             document.getElementById("id21").textContent = "Name";
             document.getElementById("id22").textContent = "Surname";
+            document.getElementById("id56").textContent = "Generated excercises";
+            document.getElementById("id57").textContent = "Submitted";
+            document.getElementById("id58").textContent = "Points";
             });
         });
     </script>
