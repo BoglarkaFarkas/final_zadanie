@@ -110,14 +110,13 @@ if ($rowCount == 0) {
 
 
 <div class="myDivForSt">
-<p id="id55">Solution: <span id="math-field"></span></p>
-<form id="form" action="" method="post">
+    <p id="id55">Solution:</p>
+    <p><span id="math-field"></span></p>
+    <form id="form" action="" method="post">
     <input id="latex" name="latex" type="hidden" value="">
     <input id="exampleID" name="exampleID" type="hidden" value="<?php echo $exampleID; ?>">
     <button type="button" id='id30' onclick="submitForm()">Submit</button>
-</form>
-
-
+    </form>
 </div>
 </section>
 <script>
