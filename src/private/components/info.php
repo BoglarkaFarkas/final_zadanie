@@ -1,7 +1,4 @@
 <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
     session_start();
     if(!isset($_SESSION)){
         header("Location: ../../index.php");
@@ -10,6 +7,9 @@
     if($_SESSION['role']=='student'){
         header("Location: ../../logedStudent.php");
         exit;
+    }
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
     }
 ?>
 
@@ -36,20 +36,27 @@
   </div>
   <nav>
       <li><a href="../../loged.php"><img src = "../../photos/add-circle-svgrepo-com.svg" alt="student"/></a></li>
-      <li><a href="stats.php"  class="active"><img src = "../../photos/statistics.svg" alt="logout"/></a></li>
+      <li><a href="stats.php"><img src = "../../photos/statistics.svg" alt="logout"/></a></li>
       <li><a href="teacherPdf.php"><img src = "../../photos/guide-link-svgrepo-com.svg" alt="man"/></a></li>
       <li><a href="uploadForm.php"><img src = "../../photos/upload-svgrepo-com.svg" alt="upload"/></a></li>
       <li><a href="../../logout.php"><img src = "../../photos/log-out-svgrepo-com.svg" alt="logout"/></a></li>
   </nav>
-  <h3 class="py-2" id="id20">Zoznam študentov</h3>
-    <section>
+  <section>
         <div class="container">
             <?php
-                require_once("../classes/Table.php");
-                $table = new Table();
+                require_once("../classes/InfoTable.php");
+                $table = new InfoTable($id);
                 $htmlTable = $table->generateTable();
                 echo $htmlTable;
             ?>
+            <div>
+                - = <span id="id61">rozpracované</span>
+                <br>
+                x = <span id="id62">nesprávne</span>
+                <br>
+                ok = <span id="id63">správne</span>
+            </div>
+            
             <div class="input-box">
                <button onclick="exportCSV()" id="exportBtn">Exportovať do CSV</button>
             </div>
@@ -57,34 +64,28 @@
         </div>
         
     </section>
-    <!------------------------------------------JS---------------------------------------->
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable({
               searching: false,
-              "columnDefs": [
-                { "orderData": [5, 2], "targets": 5 }, 
-                { "orderData": [2], "targets": 2 } 
-                ],
                 "paging": false, // Skryť stránkovanie
                 "lengthChange": false,
                 "info": false
             });
         } );
     </script>
-    <script>
+        <script>
         document.getElementById("sk-button").addEventListener("click", function() {
         fetch('../../bilingual.json')
             .then(response => response.json())
             .then(data => {
-            document.getElementById("id20").textContent = "Zoznam študentov";
-            document.getElementById("exportBtn").textContent = "Exportovať do CSV";
-            document.getElementById("id23").textContent = "ID";
-            document.getElementById("id21").textContent = "Meno";
-            document.getElementById("id22").textContent = "Priezvisko";
-            document.getElementById("id56").textContent = "Vygenerované príklady";
-            document.getElementById("id57").textContent = "Odovzdané";
+            document.getElementById("id59").textContent = "Úloha";
+            document.getElementById("id60").textContent = "Stav";
             document.getElementById("id58").textContent = "Body";
+            document.getElementById("exportBtn").textContent = "Exportovať do CSV";
+            document.getElementById("id61").textContent = "rozpracované";
+            document.getElementById("id62").textContent = "nesprávne";
+            document.getElementById("id63").textContent = "správne";
             });
         });
 
@@ -92,17 +93,16 @@
         fetch('../../bilingual.json')
             .then(response => response.json())
             .then(data => {
-            document.getElementById("id20").textContent = "List of students";
-            document.getElementById("exportBtn").textContent = "Export to CSV";
-            document.getElementById("id23").textContent = "ID";
-            document.getElementById("id21").textContent = "Name";
-            document.getElementById("id22").textContent = "Surname";
-            document.getElementById("id56").textContent = "Generated exercises";
-            document.getElementById("id57").textContent = "Submitted";
+            document.getElementById("id59").textContent = "Excercise";
+            document.getElementById("id60").textContent = "State";
             document.getElementById("id58").textContent = "Points";
+            document.getElementById("exportBtn").textContent = "Export to CSV";
+            document.getElementById("id61").textContent = "in progress";
+            document.getElementById("id62").textContent = "wrong";
+            document.getElementById("id63").textContent = "correct";
             });
         });
     </script>
     <script src="../../public/js/exportCSV.js"></script>
-
 </body>
+</html>

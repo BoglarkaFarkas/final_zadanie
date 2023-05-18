@@ -87,12 +87,12 @@ class Table {
         for ($i = 0; $i < $rowCount; $i++) {
             $html .= '
                 <tr>
-                    <td>' . $ids[$i] . '</td>
-                    <td>' . $names[$i] . '</td>
-                    <td>' . $lastNames[$i] . '</td>
-                    <td>'. count($this->generatedExcercises($ids[$i])).'</td>
-                    <td>'.count($this->submitted($this->generatedExcercises($ids[$i]))).'</td>
-                    <td>'.$this->points($this->submitted($this->generatedExcercises($ids[$i]))).'</td>
+                    <td><a style="text-decoration:none; color:black;" href="info.php?id='.$ids[$i].'">' . $ids[$i] . '</a></td>
+                    <td><a style="text-decoration:none; color:black;" href="info.php?id='.$ids[$i].'">' . $names[$i] . '</a></td>
+                    <td><a style="text-decoration:none; color:black;" href="info.php?id='.$ids[$i].'">' . $lastNames[$i] . '</a></td>
+                    <td><a style="text-decoration:none; color:black;" href="info.php?id='.$ids[$i].'">'. count($this->generatedExcercises($ids[$i])).'</a></td>
+                    <td><a style="text-decoration:none; color:black;" href="info.php?id='.$ids[$i].'">'.count($this->submitted($this->generatedExcercises($ids[$i]))).'</a></td>
+                    <td><a style="text-decoration:none; color:black;" href="info.php?id='.$ids[$i].'">'.$this->points($this->submitted($this->generatedExcercises($ids[$i]))).'</a></td>
                 </tr>';
         }
         $html .= '</tbody>';

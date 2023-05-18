@@ -62,8 +62,12 @@
     "id55": "Riešenie:",
     "id56": "Vygenerované príklady",
     "id57": "Odovzdané",
-    "id58": "Body"
-   
+    "id58": "Body",
+    "id59": "Úloha",
+    "id60": "Stav",
+    "id61": "rozpracované",
+    "id62": "nesprávne",
+    "id63": "správne"
 
 
 
@@ -129,8 +133,13 @@
   "continueBut2": "New example",
   "id54": "There is an already started example:",
   "id55": "Solution:",
-  "id56": "Generated excercises",
+  "id56": "Generated exercises",
   "id57": "Submitted",
-  "id58": "Points"
+  "id58": "Points",
+  "id59": "Exercise",
+  "id60": "State",
+  "id61": "in Progress",
+  "id62": "wrong",
+  "id63": "correct"
   }
 }
